@@ -3,12 +3,12 @@ import './App.css';
 import { Router } from "@reach/router"
 import Main from './screen/Main';
 import Category from './screen/Category';
-import Navigation from './components/Navigation';
+import Header from './components/Header/Header';
 
 const App: React.FC = () => {
   return (
       <div>
-        <Navigation/>
+        <Header/>
         <Router>
           <Main path="/" />
           <Category path="category" />
