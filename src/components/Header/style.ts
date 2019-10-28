@@ -21,7 +21,7 @@ export const StyledHeader = styled.header`
 export const Navigation = styled.nav`
 	display: flex;
 
-	${media.phone} {
+	${media.tabPort} {
 		flex-direction: column;
 		align-items: center;
 	}
@@ -34,7 +34,7 @@ export const StyledLink = styled(Link)`
 	&:not(:last-of-type) {
 		margin-right: 10.6rem;
 
-		${media.phone} {
+		${media.tabPort} {
 			margin-right: 0;
 			margin-bottom: 1.8rem;
 		}
@@ -48,7 +48,7 @@ export const LinkContainer = styled.div`
 	align-items: center;
 	margin-left: auto;
 
-	${media.phone} {
+	${media.tabPort} {
 		margin-left: 0;
 		flex-direction: column;
 		margin-top: 1.8rem;
@@ -62,7 +62,7 @@ export const Banner = styled(Link)`
 	text-decoration-line: none;
 	color: ${props => props.theme.colors.white};
 
-	${media.phone} {
+	${media.tabPort} {
 		flex-direction: column;
 		align-items: center;
 	}
@@ -81,7 +81,7 @@ export const BannerFooter = styled.img`
 	width: 100%;
 	height: 8.1rem;
 	margin-top: -2px;
-	${media.phone} {
+	${media.tabPort} {
 		object-fit: cover;
 	}
 `

@@ -2,12 +2,14 @@ import {css, DefaultTheme} from 'styled-components'
 
 export const colors = {
 	blue: '#001BB7',
+	cyan: '#8DF5D9',
 	white: '#ffffff',
 	black: '#000000',
 }
 
 export const appColors = {
 	primary: colors.blue,
+	secondary: colors.cyan,
 	text: colors.black,
 }
 
@@ -20,7 +22,8 @@ export const fontSizes = {
 	sm: '1.4rem',
 	md: '1.6rem',
 	lg: '2.4rem',
-	xl: '3rem',
+	xl: '3.6rem',
+	xxl: '6rem',
 }
 
 const space = [
