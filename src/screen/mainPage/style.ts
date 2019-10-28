@@ -13,6 +13,11 @@ export const ContentContainer = styled.div`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
+
+	${media.tabPort} {
+		align-items: center;
+		text-align: center;
+	}
 `
 
 export const ImageContainer = styled.div`
@@ -26,7 +31,9 @@ export const HeroImage = styled.img`
 	margin: 0 auto;
 
 	${media.tabPort} {
-		width: 100%;
+		width: 80%;
+		max-width: 50rem;
+		margin-bottom: 4rem;
 	}
 `
 
@@ -41,7 +48,7 @@ export const ClassifyButton = styled(Link)`
 	border-radius: 2rem;
 	background-color: ${props => props.theme.appColors.secondary};
 	width: 80%;
-	padding: 2.7rem 7.7rem;
+	padding: 2rem 7.7rem;
 	text-align: center;
 	text-decoration-line: none;
 	color: ${props => props.theme.colors.black};
@@ -53,5 +60,6 @@ export const ClassifyButton = styled(Link)`
 
 	${media.tabPort} {
 		width: 100%;
+		max-width: 70rem;
 	}
 `

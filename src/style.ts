@@ -4,7 +4,8 @@ import {media} from './styles/utils'
 export const Container = styled.div`
 	padding: 4.5rem;
 
-	${media.tabPort} {
+	${media.phone} {
 		padding-top: 0;
+		margin-top: 232px;
 	}
 `
