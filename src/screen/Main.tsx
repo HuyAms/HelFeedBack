@@ -1,15 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 interface Props {
-  path: string,
+	path: string
 }
 
-const Main:React.FC<Props> = (props) => (
-    <div>
-      Main page
-    </div>
-);
+const Main: React.FC<Props> = props => <div>Main page</div>
 
 export default Main
-
-
