@@ -5,6 +5,7 @@ interface Props {
 	path: string
 }
 
-export const Category: React.FC<Props> = props => <div>Category page</div>
-
+export const Category: React.FC<Props> = props => {
+	return <h1>Hello world</h1>
+}
 export default Category
