@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
 		font-size: 50%;
 	}
 }
+
  body {
 		font-family: ${props => props.theme.fontStack};
 		font-weight: 400;
@@ -20,12 +21,19 @@ export const GlobalStyle = createGlobalStyle`
 		color: ${props => props.theme.appColors.text} ;
 		font-size: ${props => props.theme.fontSizes.md} ;
 	}
+	
 	h1 {
 		margin: 0;
 		font-size: ${props => props.theme.fontSizes.xl};
+		line-height: 1.16;
 	}
+	
 	h2 {
 		text-transform: uppercase;
+		font-size: ${props => props.theme.fontSizes.lg};
+	}
+	
+	p {
 		font-size: ${props => props.theme.fontSizes.lg};
 	}
 `
