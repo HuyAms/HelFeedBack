@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {media} from '../../styles/utils'
 
 export const Container = styled.div`
 	display: flex;
@@ -39,6 +40,10 @@ export const InstructionButton = styled.div`
 export const QuestionContainer = styled.div`
 	display: flex;
 	margin-bottom: 2rem;
+
+	${media.phone} {
+		flex-direction: column-reverse;
+	}
 `
 
 export const QuestionContentContainer = styled.div`
