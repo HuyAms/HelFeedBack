@@ -29,11 +29,11 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	
 	h2 {
-		text-transform: uppercase;
 		font-size: ${props => props.theme.fontSizes.lg};
 	}
 	
 	p {
 		font-size: ${props => props.theme.fontSizes.lg};
+		margin: 0 0 1rem;
 	}
 `
