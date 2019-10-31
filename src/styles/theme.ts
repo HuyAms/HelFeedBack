@@ -5,6 +5,7 @@ export const colors = {
 	cyan: '#8DF5D9',
 	white: '#ffffff',
 	black: '#000000',
+	lightGrey: '#C4C4C4',
 }
 
 export const appColors = {
