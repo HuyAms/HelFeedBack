@@ -19,6 +19,7 @@ import ArrowBackSrc from '../../assets/arrow-back-icon.svg'
 import ArrowForwardSrc from '../../assets/arrow-forward-icon.svg'
 import DataImgSrc from '../../assets/weather.png'
 import AwesomeEmoSrc from '../../assets/awesome-img.png'
+import CenterMode from '../../components/IconSlider/IconSlider'
 
 interface Props {
 	path: string
@@ -46,38 +47,7 @@ const Question: React.FC<Props> = props => {
 					<DataImage src={DataImgSrc} />
 				</DataContentContainer>
 			</QuestionContainer>
-			<AnswerContainer>
-				<AnswerContentContainer>
-					<AnswerImage src={AwesomeEmoSrc} />
-					<AnswerLabelContainer>
-						<p>Awesome</p>
-					</AnswerLabelContainer>
-				</AnswerContentContainer>
-				<AnswerContentContainer>
-					<AnswerImage src={AwesomeEmoSrc} />
-					<AnswerLabelContainer>
-						<p>Awesome</p>
-					</AnswerLabelContainer>
-				</AnswerContentContainer>
-				<AnswerContentContainer>
-					<AnswerImage src={AwesomeEmoSrc} />
-					<AnswerLabelContainer>
-						<p>Awesome</p>
-					</AnswerLabelContainer>
-				</AnswerContentContainer>
-				<AnswerContentContainer>
-					<AnswerImage src={AwesomeEmoSrc} />
-					<AnswerLabelContainer>
-						<p>Awesome</p>
-					</AnswerLabelContainer>
-				</AnswerContentContainer>
-				<AnswerContentContainer>
-					<AnswerImage src={AwesomeEmoSrc} />
-					<AnswerLabelContainer>
-						<p>Awesome</p>
-					</AnswerLabelContainer>
-				</AnswerContentContainer>
-			</AnswerContainer>
+			<CenterMode />
 		</Container>
 	)
 }

@@ -36,4 +36,10 @@ export const GlobalStyle = createGlobalStyle`
 		font-size: ${props => props.theme.fontSizes.lg};
 		margin: 0 0 1rem;
 	}
+	
+	.slick-active img {
+		width: 12rem;
+		height: 12rem;
+		transition: all 1s ;
+	}
 `
