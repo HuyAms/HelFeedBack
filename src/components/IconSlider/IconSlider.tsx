@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Slider from 'react-slick'
-import AnswerImageSrc from '../../assets/awesome-img.png'
+import AnswerImageSrc from '../../assets/answers-icon/awesome-img.png'
 import {AnswerImage} from './style'
 
 export default class CenterMode extends Component {

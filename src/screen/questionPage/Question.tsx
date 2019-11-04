@@ -18,7 +18,7 @@ import {
 import ArrowBackSrc from '../../assets/arrow-back-icon.svg'
 import ArrowForwardSrc from '../../assets/arrow-forward-icon.svg'
 import DataImgSrc from '../../assets/weather.png'
-import AwesomeEmoSrc from '../../assets/awesome-img.png'
+import AwesomeEmoSrc from '../../assets/answers-icon/awesome-img.png'
 import CenterMode from '../../components/IconSlider/IconSlider'
 
 interface Props {
