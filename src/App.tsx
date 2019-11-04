@@ -5,6 +5,7 @@ import Main from './screen/mainPage/Main'
 import Category from './screen/Category'
 import Header from './components/Header/Header'
 import {Container} from './style'
+import Question from './screen/questionPage/Question'
 
 const App: React.FC = () => {
 	return (
@@ -12,8 +13,9 @@ const App: React.FC = () => {
 			<Header />
 			<Container>
 				<Router>
-					<Main path="/" />
-					<Category path="category" />
+					<Main path="category" />
+					<Category path="question" />
+					<Question path="/" />
 				</Router>
 			</Container>
 		</div>
