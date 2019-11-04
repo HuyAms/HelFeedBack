@@ -1,9 +1,14 @@
 import React, {Component} from 'react'
 import Slider from 'react-slick'
-import AnswerImageSrc from '../../assets/answers-icon/awesome-img.png'
+import AwesomeImgSrc from '../../assets/answers-icon/awesome-img.png'
+import BadImgSrc from '../../assets/answers-icon/bad-img.png'
+import HappyImgSrc from '../../assets/answers-icon/happy-img.png'
+import NormalImgSrc from '../../assets/answers-icon/normal-img.png'
+import TerribleImgSrc from '../../assets/answers-icon/terrible-img.png'
+
 import {AnswerImage} from './style'
 
-export default class CenterMode extends Component {
+export default class IconSlider extends Component {
 	render() {
 		const settings = {
 			centerMode: true,
@@ -11,26 +16,46 @@ export default class CenterMode extends Component {
 			slidesToScroll: 1,
 			variableWidth: true,
 			speed: 500,
+			infinite: false,
+			initialSlide: 1,
 		}
 
 		return (
 			<div>
-				<h2>Center Mode</h2>
 				<Slider {...settings}>
 					<div style={{width: '120px'}}>
-						<AnswerImage src={AnswerImageSrc} style={{margin: '0 auto'}} />
+						<AnswerImage src={AwesomeImgSrc} style={{margin: '0 auto'}} />
+						<div style={{display: 'flex', justifyContent: 'center'}}>
+							<p>Awesome</p>
+						</div>
 					</div>
+
 					<div style={{width: '120px'}}>
-						<AnswerImage src={AnswerImageSrc} style={{margin: '0 auto'}} />
+						<AnswerImage src={HappyImgSrc} style={{margin: '0 auto'}} />
+						<div style={{display: 'flex', justifyContent: 'center'}}>
+							<p>Happy</p>
+						</div>
 					</div>
+
 					<div style={{width: '120px'}}>
-						<AnswerImage src={AnswerImageSrc} style={{margin: '0 auto'}} />
+						<AnswerImage src={NormalImgSrc} style={{margin: '0 auto'}} />
+						<div style={{display: 'flex', justifyContent: 'center'}}>
+							<p>Normal</p>
+						</div>
 					</div>
+
 					<div style={{width: '120px'}}>
-						<AnswerImage src={AnswerImageSrc} style={{margin: '0 auto'}} />
+						<AnswerImage src={BadImgSrc} style={{margin: '0 auto'}} />
+						<div style={{display: 'flex', justifyContent: 'center'}}>
+							<p>Bad</p>
+						</div>
 					</div>
+
 					<div style={{width: '120px'}}>
-						<AnswerImage src={AnswerImageSrc} style={{margin: '0 auto'}} />
+						<AnswerImage src={TerribleImgSrc} style={{margin: '0 auto'}} />
+						<div style={{display: 'flex', justifyContent: 'center'}}>
+							<p>Terrible</p>
+						</div>
 					</div>
 				</Slider>
 			</div>
