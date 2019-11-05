@@ -17,9 +17,25 @@ export const CategoryButton = styled(Link)`
 	align-items: center;
 
 	position: relative;
+
+	${media.phone} {
+		padding: 1rem;
+		width: 17rem;
+		height: 17rem;
+		size: 1rem;
+	}
+`
+export const CategoryLabel = styled.p`
+	${media.phone} {
+		font-size: ${props => props.theme.fontSizes.lg};
+	}
 `
 
-export const CategoryImage = styled.img``
+export const CategoryImage = styled.img`
+	${media.phone} {
+		width: 85%;
+	}
+`
 
 export const InstructionButton = styled.div`
 	width: 6rem;
@@ -34,5 +50,5 @@ export const InstructionButton = styled.div`
 
 	position: absolute;
 	top: -3rem;
-	right: -3rem;
+	right: -2rem;
 `
