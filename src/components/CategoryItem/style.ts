@@ -32,6 +32,7 @@ export const CategoryLabel = styled.p`
 `
 
 export const CategoryImage = styled.img`
+	width: 100%;
 	${media.phone} {
 		width: 85%;
 	}
