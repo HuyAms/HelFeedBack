@@ -20,27 +20,30 @@ export const CategoryButton = styled(Link)`
 
 	${media.phone} {
 		padding: 1rem;
-		width: 17rem;
-		height: 17rem;
+		width: 12rem;
+		height: 12rem;
 		size: 1rem;
 	}
 `
 export const CategoryLabel = styled.p`
 	${media.phone} {
-		font-size: ${props => props.theme.fontSizes.lg};
+		font-size: ${props => props.theme.fontSizes.md};
+		position: relative;
+		top: 0.5rem;
 	}
 `
 
 export const CategoryImage = styled.img`
 	width: 100%;
 	${media.phone} {
-		width: 85%;
+		position: relative;
+		top: 0.5rem;
 	}
 `
 
 export const InstructionButton = styled.div`
-	width: 6rem;
-	height: 6rem;
+	width: 5rem;
+	height: 5rem;
 	border-radius: 1rem;
 	background-color: ${props => props.theme.colors.cyan};
 	font-size: ${props => props.theme.fontSizes.xl};
