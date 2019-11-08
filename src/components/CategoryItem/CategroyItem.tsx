@@ -5,13 +5,18 @@ import {
 	CategoryImage,
 	CategoryLabel,
 } from './style'
-import temperatureImageSrc from '../../assets/categoryAssets/temperature-image.png'
 
-const CategoryItem: React.FC = props => {
+const CategoryItem = ({
+	categoryImageSource,
+	categoryName,
+}: {
+	categoryImageSource: string
+	categoryName: string
+}) => {
 	return (
 		<CategoryButton to="question">
-			<CategoryImage src={temperatureImageSrc} />
-			<CategoryLabel>Temperature</CategoryLabel>
+			<CategoryImage src={categoryImageSource} />
+			<CategoryLabel>{categoryName}</CategoryLabel>
 			<InstructionButton>?</InstructionButton>
 		</CategoryButton>
 	)

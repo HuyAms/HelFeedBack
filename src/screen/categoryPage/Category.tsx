@@ -48,14 +48,17 @@ interface Props {
 	path: string
 }
 
-export const Category: React.FC<Props> = props => {
-	return (
-		<UnordererCategoryList>
-			{listOfCategories.map(category => (
-				<CategoryItem />
-			))}
-		</UnordererCategoryList>
-	)
+export const Category: React.FC<Props> = () => {
+	const createCategoryList = () =>
+		listOfCategories.map(category => (
+			<CategoryItem
+				key={category.label}
+				categoryName={category.label}
+				categoryImageSource={category.imageSource}
+			/>
+		))
+
+	return <UnordererCategoryList>{createCategoryList()}</UnordererCategoryList>
 }
 
 export default Category
