@@ -3,5 +3,5 @@ export const setActiveSurveyId = (id: string) => {
 }
 
 export const getActiveSurveyId = () => {
-	localStorage.getItem('activeSurveyId')
+	return localStorage.getItem('activeSurveyId')
 }

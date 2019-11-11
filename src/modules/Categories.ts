@@ -1,15 +1,15 @@
 import produce from 'immer'
 import {startFetching, endWithError, updateData, Action} from './commons/common'
 import useModuleActions from './commons/moduleActions'
-import Survey from '../models/Survey'
+import Category from '../models/Category'
 import ModelState from '../models/bases/ModelState'
 
 // ------------------------------------
 // Const
 // ------------------------------------
 
-const moduleName = 'survey'
-const path = '/surveys'
+const moduleName = 'categories'
+const path = '/categories'
 
 const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 
@@ -17,13 +17,13 @@ const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 // Reducer
 // ------------------------------------
 
-const initialState: ModelState<Survey> = {
-	data: null,
+const initialState: ModelState<Category[]> = {
+	data: [],
 	status: 'idle',
 	error: null,
 }
 
-const survey = (state = initialState, action: Action<Survey>) =>
+const categories = (state = initialState, action: Action<Category[]>) =>
 	produce(state, draft => {
 		switch (action.type) {
 			case moduleActionTypes.GET_MODEL:
@@ -38,10 +38,10 @@ const survey = (state = initialState, action: Action<Survey>) =>
 		}
 	})
 
-export const reducer = survey
+export const reducer = categories
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-export const getSurvey = (id: string) => moduleActions.getModel(id)
+export const getCategories = () => moduleActions.getModel()

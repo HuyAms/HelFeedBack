@@ -1,64 +1,48 @@
 import React from 'react'
 import {UnordererCategoryList} from './style'
-import airImageSrc from '../../assets/categoryAssets/air-image.png'
-import cleanImageSrc from '../../assets/categoryAssets/clean-image.png'
-import humidityImageSrc from '../../assets/categoryAssets/humidity-image.png'
-import lightImageSrc from '../../assets/categoryAssets/light-image.png'
-import soundsImageSrc from '../../assets/categoryAssets/noise-image.png'
-import temperatureImageSrc from '../../assets/categoryAssets/temperature-image.png'
 import CategoryItem from '../../components/CategoryItem/CategroyItem'
+import {connect} from 'react-redux'
+import {RouteComponentProps} from '@reach/router'
+import {getCategories} from '../../modules/Categories'
+import ModelState from '../../models/bases/ModelState'
+import CategoryModel from '../../models/Category'
 
-const temperatureObject = {
-	label: 'Temperature',
-	imageSource: temperatureImageSrc,
-}
-
-const cleaninessObject = {
-	label: 'Cleaniness',
-	imageSource: cleanImageSrc,
-}
-const soundObject = {
-	label: 'Sounds',
-	imageSource: soundsImageSrc,
-}
-const lightObject = {
-	label: 'Light',
-	imageSource: lightImageSrc,
+interface Props extends RouteComponentProps {
+	getCategories: () => void
+	categories: ModelState<CategoryModel[]>
 }
 
-const airObject = {
-	label: 'Air',
-	imageSource: airImageSrc,
-}
-const humidityObject = {
-	label: 'Humidity',
-	imageSource: humidityImageSrc,
-}
+export const Category: React.FC<Props> = props => {
+	const {getCategories, categories} = props
 
-const listOfCategories = [
-	cleaninessObject,
-	soundObject,
-	airObject,
-	lightObject,
-	humidityObject,
-	temperatureObject,
-]
+	React.useEffect(() => {
+		getCategories()
+	}, [])
 
-interface Props {
-	path: string
-}
-
-export const Category: React.FC<Props> = () => {
-	const createCategoryList = () =>
-		listOfCategories.map(category => (
-			<CategoryItem
-				key={category.label}
-				categoryName={category.label}
-				categoryImageSource={category.imageSource}
-			/>
-		))
+	const createCategoryList = () => {
+		return categories.status === 'success'
+			? categories.data.map(category => (
+					<CategoryItem
+						key={category._id}
+						categoryName={category.name}
+						categoryImageSource={category.imageUrl}
+					/>
+			  ))
+			: null
+	}
 
 	return <UnordererCategoryList>{createCategoryList()}</UnordererCategoryList>
 }
 
-export default Category
+const mapStateToProps = ({categories}) => {
+	return {categories}
+}
+
+const mapDispatchToProps = {
+	getCategories,
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(Category)
