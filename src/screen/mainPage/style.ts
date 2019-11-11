@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {Link} from '@reach/router'
 import {media} from '../../styles/utils'
 
 export const Container = styled.div`
@@ -45,7 +44,7 @@ export const Heading = styled.h1`
 	}
 `
 
-export const ClassifyButton = styled(Link)`
+export const ClassifyButton = styled.div`
 	border-radius: 2rem;
 	background-color: ${props => props.theme.appColors.secondary};
 	width: 80%;

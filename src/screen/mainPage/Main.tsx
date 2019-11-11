@@ -1,5 +1,5 @@
 import React from 'react'
-import {RouteComponentProps} from '@reach/router'
+import {navigate, RouteComponentProps} from '@reach/router'
 import HeroImageSrc from '../../assets/hero-image.png'
 import {
 	ClassifyButton,
@@ -34,13 +34,21 @@ const Main: React.FC<Props> = props => {
 		}
 	}, [channel])
 
+	const goToCategory = () => {
+		return navigate(`/channel/${name}/categories`)
+	}
+
 	return (
 		<Container>
 			<ContentContainer>
 				<Heading>Welcome to Helsinki Feedback System</Heading>
 				<p>First, tell us, what group are you in?</p>
-				<ClassifyButton to="category">Under 13 years old</ClassifyButton>
-				<ClassifyButton to="category">Over 13 years old</ClassifyButton>
+				<ClassifyButton onClick={goToCategory}>
+					Under 13 years old
+				</ClassifyButton>
+				<ClassifyButton onClick={goToCategory}>
+					Over 13 years old
+				</ClassifyButton>
 			</ContentContainer>
 			<ImageContainer>
 				<HeroImage src={HeroImageSrc} alt="hero image" />
