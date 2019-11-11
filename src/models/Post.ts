@@ -1,3 +1,3 @@
 export default interface Post {
-  name: string
+	name: string
 }
