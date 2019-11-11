@@ -6,11 +6,13 @@
  */
 
 import {combineReducers} from 'redux'
-import {reducer as postsReducer} from './Posts'
+import {reducer as surveyReducer} from './Survey'
+import {reducer as channelReducer} from './Channel'
 
 const rootReducer = () =>
 	combineReducers({
-		posts: postsReducer,
+		survey: surveyReducer,
+		channel: channelReducer,
 	})
 
 export default rootReducer

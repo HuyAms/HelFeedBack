@@ -15,7 +15,7 @@ const App: React.FC = () => {
 				<Router>
 					<Main path="/" />
 					<Category path="category" />
-					<Question path="question" />
+					<Question path="category/question" />
 				</Router>
 			</Container>
 		</div>
