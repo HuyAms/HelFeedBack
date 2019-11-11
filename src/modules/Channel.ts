@@ -30,7 +30,7 @@ const channel = (state = initialState, action: Action<Channel>) =>
 				startFetching(draft)
 				break
 			case moduleActionTypes.GET_MODEL_SUCCESS:
-				updateData(draft, action.payload)
+				updateData(draft, action.payload.data)
 				break
 			case moduleActionTypes.GET_MODEL_FAIL:
 				endWithError(draft, action.error)

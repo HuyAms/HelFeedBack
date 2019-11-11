@@ -1,5 +1,5 @@
-export default interface Choice {
-	id: string
+export default interface Survey {
+	_id: string
 	value: string
 	imageUrl?: string
 }
