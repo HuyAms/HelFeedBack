@@ -17,6 +17,7 @@ export const TitleContainer = styled.div`
 
 	${media.phone} {
 		align-items: center;
+		justify-content: center;
 	}
 `
 

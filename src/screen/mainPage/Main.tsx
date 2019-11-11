@@ -19,8 +19,8 @@ const Main: React.FC<Props> = props => {
 			<ContentContainer>
 				<Heading>Welcome to Helsinki Feedback System</Heading>
 				<p>First, tell us, what group are you in?</p>
-				<ClassifyButton to="category">Under 13 years old</ClassifyButton>
-				<ClassifyButton to="category">Over 13 years old</ClassifyButton>
+				<ClassifyButton to="question">Under 13 years old</ClassifyButton>
+				<ClassifyButton to="question">Over 13 years old</ClassifyButton>
 			</ContentContainer>
 			<ImageContainer>
 				<HeroImage src={HeroImageSrc} alt="hero image" />
