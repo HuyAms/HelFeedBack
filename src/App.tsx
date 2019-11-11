@@ -13,9 +13,9 @@ const App: React.FC = () => {
 			<Header />
 			<Container>
 				<Router>
-					<Main path="/" />
-					<Category path="category" />
-					<Question path="category/question" />
+					<Main path="/channel/:name" />
+					<Category path="/channel/:name/categories" />
+					<Question path="/channel/:name/questions" />
 				</Router>
 			</Container>
 		</div>

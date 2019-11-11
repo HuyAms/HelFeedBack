@@ -1,4 +1,5 @@
 import React from 'react'
+import {RouteComponentProps} from '@reach/router'
 import HeroImageSrc from '../../assets/hero-image.png'
 import {
 	ClassifyButton,
@@ -8,12 +9,21 @@ import {
 	HeroImage,
 	ImageContainer,
 } from './style'
+import {getChannel} from '../../modules/Channel'
+import ModelState from '../../models/bases/ModelState'
+import Channel from '../../models/Channel'
+import {connect} from 'react-redux'
 
-interface Props {
-	path: string
+interface Props extends RouteComponentProps<{name: string}> {
+	channel: ModelState<Channel>
+	getChannel: (name: string) => void
 }
 
 const Main: React.FC<Props> = props => {
+	React.useEffect(() => {
+		props.getChannel(props.name)
+	}, [])
+
 	return (
 		<Container>
 			<ContentContainer>
@@ -29,4 +39,15 @@ const Main: React.FC<Props> = props => {
 	)
 }
 
-export default Main
+const mapStateToProps = ({channel}) => {
+	return {channel}
+}
+
+const mapDispatchToProps = {
+	getChannel,
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(Main)

@@ -8,8 +8,7 @@
 import axios, {AxiosInstance, AxiosResponse} from 'axios'
 import {stringify} from 'query-string'
 
-const baseUrl: string =
-	process.env.API_ENDPOINT || 'https://jsonplaceholder.typicode.com'
+const baseUrl: string = process.env.API_ENDPOINT || 'http://localhost:3000/api'
 
 export const api: AxiosInstance = axios.create({baseURL: baseUrl})
 
