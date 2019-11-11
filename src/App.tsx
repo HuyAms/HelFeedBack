@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.css'
 import {Router} from '@reach/router'
 import Main from './screen/mainPage/Main'
 import Category from './screen/categoryPage/Category'
