@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import {media} from '../../styles/utils'
 import {Link} from '@reach/router'
+import {hoverEffect} from '../Header/style'
 
-export const CategoryButton = styled(Link)`
+export const CategoryButton = styled.div`
 	background-color: ${props => props.theme.colors.lightGrey};
 	color: ${props => props.theme.colors.black};
 	border-radius: 2rem;
@@ -35,6 +36,7 @@ export const CategoryLabel = styled.p`
 
 export const CategoryImage = styled.img`
 	width: 100%;
+
 	${media.phone} {
 		position: relative;
 		top: 0.5rem;
@@ -55,4 +57,6 @@ export const InstructionButton = styled.div`
 	position: absolute;
 	top: -3rem;
 	right: -2rem;
+
+	cursor: pointer;
 `

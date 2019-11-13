@@ -3,4 +3,8 @@ export default interface Category {
 	name: string
 	description: string
 	imageUrl: string
+	instruction: {
+		text: string
+		imageUrl: string
+	}
 }
