@@ -6,5 +6,10 @@ export const AnswerImage = styled.img`
 `
 
 export const AnswerContainer = styled.div`
-	background-color: red;
+	width: 12rem;
+`
+
+export const AnswerContentContainer = styled.div`
+	display: flex;
+	justify-content: center;
 `

@@ -1,4 +1,4 @@
-import Choice from './Survey'
+import Choice from './Choice'
 
 export default interface Question {
 	heading: string
