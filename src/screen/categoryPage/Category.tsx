@@ -26,6 +26,9 @@ export const Category: React.FC<Props> = props => {
 						key={category._id}
 						categoryName={category.name}
 						categoryImageSource={category.imageUrl}
+						popupTitle={'Instruction'}
+						popupContent={category.instruction.text}
+						popupImgUrl={category.instruction.imageUrl}
 					/>
 			  ))
 			: null

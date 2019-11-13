@@ -2,7 +2,7 @@ import styled, {css, DefaultTheme, ThemedStyledProps} from 'styled-components'
 import {Link} from '@reach/router'
 import {media} from '../../styles/utils'
 
-const hoverEffect = css`
+export const hoverEffect = css`
 	opacity: 0.8;
 
 	transition: all 0.2s ease-in;

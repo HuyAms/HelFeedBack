@@ -13,7 +13,7 @@ import {getChannel} from '../../modules/Channel'
 import ModelState from '../../models/bases/ModelState'
 import Channel from '../../models/Channel'
 import {connect} from 'react-redux'
-import {setActiveSurveyId} from '../../services/localStorage'
+import {setActiveSurveyId, setChannelName} from '../../services/localStorage'
 
 interface Props extends RouteComponentProps<{name: string}> {
 	channel: ModelState<Channel>
@@ -29,8 +29,8 @@ const Main: React.FC<Props> = props => {
 
 	React.useEffect(() => {
 		if (channel.status === 'success') {
-			console.log('channel', channel.data)
 			setActiveSurveyId(channel.data.activeSurveyId)
+			setChannelName(channel.data.name)
 		}
 	}, [channel])
 
