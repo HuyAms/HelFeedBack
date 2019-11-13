@@ -1,3 +1,5 @@
 export default interface Choice {
-	name: string
+	id: string
+	value: string
+	imageUrl?: string
 }

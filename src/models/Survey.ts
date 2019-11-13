@@ -1,5 +1,8 @@
+import Question from './Question'
+
 export default interface Survey {
 	_id: string
-	value: string
-	imageUrl?: string
+	name: string
+	description?: string
+	questions: Question[]
 }

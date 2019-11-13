@@ -43,6 +43,12 @@ export const CategoryImage = styled.img`
 	}
 `
 
+export const ContentContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`
+
 export const InstructionButton = styled.div`
 	width: 5rem;
 	height: 5rem;

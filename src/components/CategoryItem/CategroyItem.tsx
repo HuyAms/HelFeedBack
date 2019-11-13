@@ -4,37 +4,40 @@ import {
 	InstructionButton,
 	CategoryImage,
 	CategoryLabel,
+	ContentContainer,
 } from './style'
 import PopupModal from '../PopupModal/PopupModal'
+import {navigate, RouteComponentProps} from '@reach/router'
+import Category from '../../models/Category'
 
-const CategoryItem = ({
-	categoryImageSource,
-	categoryName,
-	popupTitle,
-	popupImgUrl,
-	popupContent,
-}: {
-	categoryImageSource: string
-	categoryName: string
-	popupTitle: string
-	popupImgUrl: string
-	popupContent: string
-}) => {
+interface Props extends RouteComponentProps<{channelName: string}> {
+	category: Category
+}
+
+const CategoryItem: React.FC<Props> = props => {
+	const {category, channelName: channelName} = props
 	const [isVisible, setVisible] = React.useState(false)
+	const {imageUrl, name, instruction, _id} = category
 
 	const handleClose = () => {
 		setVisible(false)
 	}
 
+	const goToQuestionPage = () => {
+		return navigate(`/channel/${channelName}/categories/${_id}/questions`)
+	}
+
 	return (
 		<CategoryButton>
-			<CategoryImage src={categoryImageSource} />
-			<CategoryLabel>{categoryName}</CategoryLabel>
+			<ContentContainer onClick={goToQuestionPage}>
+				<CategoryImage src={imageUrl} />
+				<CategoryLabel>{name}</CategoryLabel>
+			</ContentContainer>
 			<InstructionButton onClick={() => setVisible(true)}>?</InstructionButton>
 			<PopupModal
-				title={popupTitle}
-				imgUrl={popupImgUrl}
-				popupContent={popupContent}
+				title={'Instruction'}
+				imgUrl={instruction.imageUrl}
+				popupContent={instruction.text}
 				isOpen={isVisible}
 				handleClose={handleClose}
 			/>
