@@ -67,3 +67,19 @@ export const LabelImg = styled.img`
 export const PopupContent = styled.p`
 	margin-top: 2.4rem;
 `
+
+export const PopupButton = styled.button`
+	background-color: ${props => props.theme.colors.cyan};
+	border-radius: 2rem;
+	border: none;
+	position: relative;
+	bottom: 12rem;
+	left: 2rem;
+	width: 30rem;
+	height: 6rem;
+	margin: 0.5rem;
+
+	font-size: ${props => props.theme.fontSizes.md};
+
+	cursor: pointer;
+`

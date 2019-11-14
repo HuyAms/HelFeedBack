@@ -9,6 +9,8 @@ import {
 import PopupModal from '../PopupModal/PopupModal'
 import {navigate, RouteComponentProps} from '@reach/router'
 import Category from '../../models/Category'
+import timeoutIcon from '../../assets/timeout-icon.png'
+import rewardIcon from '../../assets/reward-icons/010-trophy.png'
 
 interface Props extends RouteComponentProps<{channelName: string}> {
 	category: Category
@@ -35,11 +37,12 @@ const CategoryItem: React.FC<Props> = props => {
 			</ContentContainer>
 			<InstructionButton onClick={() => setVisible(true)}>?</InstructionButton>
 			<PopupModal
-				title={'Instruction'}
-				imgUrl={instruction.imageUrl}
-				popupContent={instruction.text}
+				type="timeout"
 				isOpen={isVisible}
 				handleClose={handleClose}
+				imgUrl={timeoutIcon}
+				title="Oops, timeout!"
+				popupContent=""
 			/>
 		</CategoryButton>
 	)
