@@ -3,6 +3,6 @@ import Choice from './Choice'
 export default interface Question {
 	heading: string
 	subtitle?: string
-	categoryId?: string
+	category?: string
 	choices: Choice[]
 }

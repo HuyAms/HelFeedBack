@@ -27,8 +27,9 @@ import {getSurvey} from '../../modules/Survey'
 import {connect} from 'react-redux'
 import ModelState from '../../models/bases/ModelState'
 import Survey from '../../models/Survey'
+import {RouteComponentProps} from '@reach/router'
 
-interface Props {
+interface Props extends RouteComponentProps<{id: string}> {
 	path: string
 	getSurvey: (id: string) => void
 	survey: ModelState<Survey>
@@ -41,13 +42,37 @@ export const Question: React.FC<Props> = props => {
 		getSurvey(getActiveSurveyId())
 	}, [])
 
+	const [activeQuestionIndex, setActiveQuestionIndex] = React.useState(0)
+
+	const onNextQuestion = () => {
+		if (activeQuestionIndex < survey.data.questions.length - 1)
+			setActiveQuestionIndex(index => index + 1)
+	}
+
+	const onPreviousQuestion = () => {
+		if (activeQuestionIndex > 0) setActiveQuestionIndex(index => index - 1)
+	}
+
 	const renderSurvey = () => {
 		const {data} = survey
+		const selectedCategoryItems = data.questions.filter(
+			question => question.category === props.id,
+		)
+
+		const restItems = data.questions.filter(
+			question => question.category !== props.id,
+		)
+
+		const sortedItems = [...selectedCategoryItems, ...restItems]
+		console.log('SortedItems', sortedItems)
 
 		return (
 			<>
 				<TitleContainer>
-					<StyledArrowImage src={ArrowBackSrc} />
+					<StyledArrowImage
+						src={ArrowBackSrc}
+						onClick={() => onPreviousQuestion()}
+					/>
 
 					<DataContainer>
 						<InfoContainer>
@@ -63,15 +88,18 @@ export const Question: React.FC<Props> = props => {
 						</TitleContentContainer>
 					</DataContainer>
 
-					<StyledArrowImage src={ArrowForwardSrc} />
+					<StyledArrowImage
+						src={ArrowForwardSrc}
+						onClick={() => onNextQuestion()}
+					/>
 				</TitleContainer>
 
 				<QuestionContainer>
-					<p>{data.questions[0].heading}</p>
+					<p>{sortedItems[activeQuestionIndex].heading}</p>
 				</QuestionContainer>
 
 				<AnswerContainer>
-					{data.questions[0].choices.map(choices => {
+					{sortedItems[activeQuestionIndex].choices.map(choices => {
 						return (
 							<AnswerContentContainer key={choices.id}>
 								<AnswerImage src={choices.imageUrl} />
@@ -84,7 +112,7 @@ export const Question: React.FC<Props> = props => {
 				</AnswerContainer>
 
 				<MobileAnswerContainer>
-					<IconSlider choices={data.questions[0].choices} />
+					<IconSlider choices={sortedItems[activeQuestionIndex].choices} />
 				</MobileAnswerContainer>
 
 				<StyledFooter>
@@ -92,8 +120,14 @@ export const Question: React.FC<Props> = props => {
 						<h2>?</h2>
 					</InstructionButton>
 					<h2>Temperature</h2>
-					<MobileStyledArrowImage src={ArrowBackSrc} />
-					<MobileStyledArrowImage src={ArrowForwardSrc} />
+					<MobileStyledArrowImage
+						src={ArrowBackSrc}
+						onClick={() => onPreviousQuestion()}
+					/>
+					<MobileStyledArrowImage
+						src={ArrowForwardSrc}
+						onClick={() => onNextQuestion()}
+					/>
 				</StyledFooter>
 			</>
 		)

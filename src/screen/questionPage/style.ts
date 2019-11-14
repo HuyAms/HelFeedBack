@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const TitleContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 2rem;
 
 	${media.tabPort} {
@@ -23,7 +24,9 @@ export const TitleContainer = styled.div`
 
 export const StyledArrowImage = styled.img`
 	width: 6rem;
-	height: auto;
+	height: 6rem;
+
+	cursor: pointer;
 
 	${media.phone} {
 		display: none;
