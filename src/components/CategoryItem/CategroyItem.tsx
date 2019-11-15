@@ -37,12 +37,12 @@ const CategoryItem: React.FC<Props> = props => {
 			</ContentContainer>
 			<InstructionButton onClick={() => setVisible(true)}>?</InstructionButton>
 			<PopupModal
-				type="timeout"
 				isOpen={isVisible}
 				handleClose={handleClose}
-				imgUrl={timeoutIcon}
-				title="Oops, timeout!"
-				popupContent=""
+				imgUrl={instruction.imageUrl}
+				title={name}
+				popupContent={instruction.text}
+				isHidden={true}
 			/>
 		</CategoryButton>
 	)
