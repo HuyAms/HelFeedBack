@@ -23,26 +23,16 @@ interface IProps {
 
 const PopupModal: React.FC<IProps> = props => {
 	const createPopupButton = () => {
-		if (!props.completeButtonIsHidden) {
-			return (
-				<PopupButton onClick={props.handleClose}>Back to Category</PopupButton>
-			)
-		} else if (!props.timeoutButtonIsHidden) {
-			return (
-				<PopupButtonContainer>
-					<PopupButton onClick={props.handleClose}>Continue</PopupButton>
-					<PopupButton onClick={props.handleClose}>
-						Take another feedback
-					</PopupButton>
-				</PopupButtonContainer>
-			)
-		} else {
-			return null
-		}
-
-		/* 	return props.completeButtonIsHidden ? null : (
-			<PopupButton onClick={props.handleClose}>Continue</PopupButton>
-		) */
+		return !props.completeButtonIsHidden ? (
+			<PopupButton onClick={props.handleClose}>Back to Category</PopupButton>
+		) : !props.timeoutButtonIsHidden ? (
+			<PopupButtonContainer>
+				<PopupButton onClick={props.handleClose}>Continue</PopupButton>
+				<PopupButton onClick={props.handleClose}>
+					Take another feedback
+				</PopupButton>
+			</PopupButtonContainer>
+		) : null
 	}
 
 	return props.isOpen ? (
