@@ -8,6 +8,7 @@ import {
 	PopupContainer,
 	StyledTitle,
 	PopupButton,
+	PopupButtonContainer,
 } from './style'
 
 interface IProps {
@@ -16,14 +17,32 @@ interface IProps {
 	popupContent: string
 	imgUrl: string
 	title: string
-	isHidden: boolean
+	completeButtonIsHidden: boolean
+	timeoutButtonIsHidden: boolean
 }
 
 const PopupModal: React.FC<IProps> = props => {
 	const createPopupButton = () => {
-		return props.isHidden ? null : (
+		if (!props.completeButtonIsHidden) {
+			return (
+				<PopupButton onClick={props.handleClose}>Back to Category</PopupButton>
+			)
+		} else if (!props.timeoutButtonIsHidden) {
+			return (
+				<PopupButtonContainer>
+					<PopupButton onClick={props.handleClose}>Continue</PopupButton>
+					<PopupButton onClick={props.handleClose}>
+						Take another feedback
+					</PopupButton>
+				</PopupButtonContainer>
+			)
+		} else {
+			return null
+		}
+
+		/* 	return props.completeButtonIsHidden ? null : (
 			<PopupButton onClick={props.handleClose}>Continue</PopupButton>
-		)
+		) */
 	}
 
 	return props.isOpen ? (

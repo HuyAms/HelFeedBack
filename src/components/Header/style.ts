@@ -13,7 +13,7 @@ export const hoverEffect = css`
 `
 
 export const AppHeader = styled.div`
-	z-index: 999;
+	z-index: 99;
 
 	${media.phone} {
 		position: fixed;

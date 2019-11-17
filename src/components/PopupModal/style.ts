@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {hoverEffect} from '../Header/style'
+import {media} from '../../styles/utils'
 
 export const PopupBackground = styled.div`
 	background-color: rgba(0, 0, 0, 0.5);
@@ -23,6 +24,10 @@ export const PopupContainer = styled.div`
 
 	border-radius: 2rem;
 	padding: 1.6rem;
+
+	${media.phone} {
+		z-index: 999;
+	}
 `
 
 export const CloseContainer = styled.div`
@@ -67,12 +72,16 @@ export const LabelImg = styled.img`
 export const PopupContent = styled.p`
 	margin-top: 2.4rem;
 `
+export const PopupButtonContainer = styled.div`
+	position: relative;
+	text-align: center;
+`
 
 export const PopupButton = styled.button`
 	background-color: ${props => props.theme.colors.cyan};
 	border-radius: 2rem;
 	border: none;
-
+	margin: 0.5rem;
 	width: 30rem;
 	height: 6rem;
 
