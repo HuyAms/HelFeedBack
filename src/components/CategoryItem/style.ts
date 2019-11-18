@@ -47,6 +47,7 @@ export const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	cursor: pointer;
 `
 
 export const InstructionButton = styled.div`

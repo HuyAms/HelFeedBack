@@ -54,6 +54,8 @@ export const ClassifyButton = styled.div`
 	color: ${props => props.theme.colors.black};
 	font-size: ${props => props.theme.fontSizes.lg};
 
+	cursor: pointer;
+
 	:not(:last-child) {
 		margin-bottom: 2.1rem;
 	}
