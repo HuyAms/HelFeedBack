@@ -22,24 +22,25 @@ import ArrowBackSrc from '../../assets/arrow-back-icon.svg'
 import ArrowForwardSrc from '../../assets/arrow-forward-icon.svg'
 import DataImgSrc from '../../assets/weather.png'
 import IconSlider from '../../components/IconSlider/IconSlider'
-import {getActiveSurveyId} from '../../services/localStorage'
 import {getSurvey} from '../../modules/Survey'
 import {connect} from 'react-redux'
 import ModelState from '../../models/bases/ModelState'
 import Survey from '../../models/Survey'
 import {RouteComponentProps} from '@reach/router'
+import App from '../../models/App'
 
 interface Props extends RouteComponentProps<{id: string}> {
 	path: string
 	getSurvey: (id: string) => void
 	survey: ModelState<Survey>
+	app: App
 }
 
-export const Question: React.FC<Props> = props => {
-	const {getSurvey, survey} = props
+const Question: React.FC<Props> = props => {
+	const {getSurvey, survey, app} = props
 
 	React.useEffect(() => {
-		getSurvey(getActiveSurveyId())
+		getSurvey(app.activeSurveyId)
 	}, [])
 
 	const [activeQuestionIndex, setActiveQuestionIndex] = React.useState(0)
@@ -138,8 +139,8 @@ export const Question: React.FC<Props> = props => {
 	)
 }
 
-const mapStateToProps = ({survey}) => {
-	return {survey}
+const mapStateToProps = ({survey, app}) => {
+	return {survey, app}
 }
 
 const mapDispatchToProps = {
