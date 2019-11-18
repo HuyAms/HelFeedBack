@@ -35,7 +35,11 @@ export const Category: React.FC<Props> = props => {
 			: null
 	}
 
-	return <UnordererCategoryList>{createCategoryList()}</UnordererCategoryList>
+	return (
+		<div>
+			<UnordererCategoryList>{createCategoryList()}</UnordererCategoryList>
+		</div>
+	)
 }
 
 const mapStateToProps = ({categories}) => {
