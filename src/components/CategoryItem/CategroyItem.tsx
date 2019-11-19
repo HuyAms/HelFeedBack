@@ -40,9 +40,7 @@ const CategoryItem: React.FC<Props> = props => {
 				imgUrl={instruction.imageUrl}
 				title={name}
 				popupContent={instruction.text}
-				completeButtonIsHidden={true}
-				timeoutButtonIsHidden={true}
-			></PopupModal>
+			/>
 		</CategoryButton>
 	)
 }

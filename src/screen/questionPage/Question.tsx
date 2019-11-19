@@ -22,7 +22,8 @@ import {
 import ArrowBackSrc from '../../assets/arrow-back-icon.svg'
 import ArrowForwardSrc from '../../assets/arrow-forward-icon.svg'
 import DataImgSrc from '../../assets/weather.png'
-import timeOutIcon from '../../assets/timeout-icon.png'
+import TimeOutIcon from '../../assets/timeout-icon.png'
+import SuccessIcon from '../../assets/reward-icons/005-medal.png'
 import IconSlider from '../../components/IconSlider/IconSlider'
 import {getSurvey} from '../../modules/Survey'
 import {connect} from 'react-redux'
@@ -30,12 +31,13 @@ import ModelState from '../../models/bases/ModelState'
 import Survey from '../../models/Survey'
 import PopupModal from '../../components/PopupModal/PopupModal'
 
-import {RouteComponentProps} from '@reach/router'
+import {navigate, RouteComponentProps} from '@reach/router'
 import App from '../../models/App'
 import {Feedback} from '../../models/Feedback'
 import {createFeedback} from '../../modules/Feedback'
 import Channel from '../../models/Channel'
 import {usePrevious} from '../../utils/hooks'
+import {Content, PopupButton} from '../../components/PopupModal/style'
 
 interface Props extends RouteComponentProps<{id: string}> {
 	path: string
@@ -43,14 +45,15 @@ interface Props extends RouteComponentProps<{id: string}> {
 	survey: ModelState<Survey>
 	app: App
 	createFeedback: (feedback: Feedback) => any
-	channel: Channel
+	channel: ModelState<Channel>
 	feedback: ModelState<Feedback>
 }
 
 const Question: React.FC<Props> = props => {
 	const {getSurvey, survey, app, createFeedback, channel, feedback} = props
 	const prevFeedbackStatus = usePrevious(feedback.status)
-	const [isVisible, setVisible] = React.useState(false)
+	const [isTimeOutVisible, setTimeoutVisible] = React.useState(false)
+	const [isCompleteVisible, setCompleteVisible] = React.useState(false)
 	const [timeout] = React.useState(1000 * 60 * 10)
 	const [isTimedOut, setIsTimedOut] = React.useState(false)
 	const [idleTimer, setIdleTimer] = React.useState(null)
@@ -72,8 +75,11 @@ const Question: React.FC<Props> = props => {
 	const [activeQuestionIndex, setActiveQuestionIndex] = React.useState(0)
 
 	const onNextQuestion = () => {
-		if (activeQuestionIndex < survey.data.questions.length - 1)
+		if (activeQuestionIndex < survey.data.questions.length - 1) {
 			setActiveQuestionIndex(index => index + 1)
+		} else {
+			setCompleteVisible(true)
+		}
 	}
 
 	const onPreviousQuestion = () => {
@@ -82,18 +88,29 @@ const Question: React.FC<Props> = props => {
 
 	const submitFeedback = (choiceId: string, questionId: string) => {
 		const feedback: Feedback = {
-			channelId: channel._id,
+			channelId: channel.data._id,
 			surveyId: survey.data._id,
 			questionId,
 			value: choiceId,
 		}
 
 		props.createFeedback(feedback)
-		setVisible(true)
 	}
 
-	const handleClose = () => {
-		setVisible(false)
+	const handleCloseTimeout = () => {
+		setTimeoutVisible(false)
+	}
+
+	const handleCloseComplete = () => {
+		setCompleteVisible(false)
+	}
+
+	const handleNavigateToCategory = () => {
+		return navigate(`/channel/${channel.data.name}/categories`)
+	}
+
+	const handleNavigateToHome = () => {
+		return navigate(`/channel/${channel.data.name}/`)
 	}
 
 	const onAction = () => {
@@ -105,7 +122,7 @@ const Question: React.FC<Props> = props => {
 
 	const onIdle = () => {
 		setIsTimedOut(true)
-		setVisible(true)
+		setTimeoutVisible(true)
 		idleTimer.reset()
 	}
 
@@ -138,15 +155,31 @@ const Question: React.FC<Props> = props => {
 					debounce={250}
 					timeout={timeout}
 				/>
+
 				<PopupModal
-					isOpen={isVisible}
-					handleClose={handleClose}
-					imgUrl={timeOutIcon}
+					isOpen={isTimeOutVisible}
+					handleClose={handleCloseTimeout}
+					imgUrl={TimeOutIcon}
 					title="Oops, timeout!"
 					popupContent=""
-					completeButtonIsHidden={true}
-					timeoutButtonIsHidden={false}
-				/>
+				>
+					<PopupButton onClick={handleCloseTimeout}>Continue</PopupButton>
+					<PopupButton onClick={handleNavigateToHome}>
+						Return to Home
+					</PopupButton>
+				</PopupModal>
+
+				<PopupModal
+					isOpen={isCompleteVisible}
+					handleClose={handleCloseComplete}
+					imgUrl={SuccessIcon}
+					title="Amazing work!"
+					popupContent="Thank you for your feedback"
+				>
+					<PopupButton onClick={handleNavigateToCategory}>
+						Back to category
+					</PopupButton>
+				</PopupModal>
 				<TitleContainer>
 					<StyledArrowImage
 						src={ArrowBackSrc}
