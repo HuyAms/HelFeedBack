@@ -1,5 +1,5 @@
 export default interface Choice {
-	id: string
+	_id: string
 	value: string
 	imageUrl?: string
 }

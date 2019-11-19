@@ -1,23 +1,21 @@
 import React from 'react'
 import {Router} from '@reach/router'
-import Main from './screen/mainPage/Main'
-import Category from './screen/categoryPage/Category'
-import Header from './components/Header/Header'
-import {Container} from './style'
+import ChannelLayout from './layout/ChannelLayout'
 import Question from './screen/questionPage/Question'
+import Category from './screen/categoryPage/Category'
+import Main from './screen/mainPage/Main'
 
-const App: React.FC = () => {
+const App = () => {
 	return (
-		<div>
-			<Header />
-			<Container>
-				<Router>
-					<Main path="/channel/:name" />
-					<Category path="/channel/:name/categories" />
-					<Question path="/channel/:name/categories/:id/questions" />
-				</Router>
-			</Container>
-		</div>
+		<>
+			<Router>
+				<ChannelLayout path="/channel/:name">
+					<Main path="/" />
+					<Category path="categories" />
+					<Question path="categories/:id/questions" />
+				</ChannelLayout>
+			</Router>
+		</>
 	)
 }
 

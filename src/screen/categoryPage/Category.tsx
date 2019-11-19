@@ -7,20 +7,21 @@ import {getCategories} from '../../modules/Categories'
 import {getSurvey} from '../../modules/Survey'
 import ModelState from '../../models/bases/ModelState'
 import CategoryModel from '../../models/Category'
-import {getActiveSurveyId} from '../../services/localStorage'
+import App from '../../models/App'
 
 interface Props extends RouteComponentProps<{name: string}> {
 	getCategories: () => void
 	categories: ModelState<CategoryModel[]>
 	getSurvey: (id: string) => void
+	app: App
 }
 
-export const Category: React.FC<Props> = props => {
-	const {getCategories, categories, getSurvey, name} = props
+const Category: React.FC<Props> = props => {
+	const {getCategories, categories, getSurvey, name, app} = props
 
 	React.useEffect(() => {
 		getCategories()
-		getSurvey(getActiveSurveyId())
+		getSurvey(app.activeSurveyId)
 	}, [])
 
 	const createCategoryList = () => {
@@ -42,8 +43,8 @@ export const Category: React.FC<Props> = props => {
 	)
 }
 
-const mapStateToProps = ({categories}) => {
-	return {categories}
+const mapStateToProps = ({categories, app}) => {
+	return {categories, app}
 }
 
 const mapDispatchToProps = {

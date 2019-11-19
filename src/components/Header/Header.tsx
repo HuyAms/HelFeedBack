@@ -14,7 +14,6 @@ import {
 import logo from '../../assets/hel-logo.svg'
 import bannerFooter from '../../assets/banner-footer.png'
 import menuIconSrc from '../../assets/menu-icon.svg'
-import {getChannelName} from '../../services/localStorage'
 
 const NavLink = (props: any) => (
 	<StyledLink
@@ -30,7 +29,11 @@ const NavLink = (props: any) => (
 	/>
 )
 
-const Header: React.FC = props => {
+interface Props {
+	channelName: string
+}
+
+const Header: React.FC<Props> = ({channelName}) => {
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
 	const onMenuBtnClicked = () => () => {
@@ -42,23 +45,20 @@ const Header: React.FC = props => {
 			<StyledHeader>
 				<Navigation>
 					<MenuIcon onClick={onMenuBtnClicked()} src={menuIconSrc} />
-					<Banner
-						onClick={onMenuBtnClicked()}
-						to={`/channel/${getChannelName()}`}
-					>
+					<Banner onClick={onMenuBtnClicked()} to={`/channel/${channelName}`}>
 						<Logo src={logo} alt="logo" />
 						<AppName>Feedback System</AppName>
 					</Banner>
 					<LinkContainer isOpen={isMenuOpen}>
 						<NavLink
 							onClick={onMenuBtnClicked()}
-							to={`/channel/${getChannelName()}`}
+							to={`/channel/${channelName}`}
 						>
 							Home
 						</NavLink>
 						<NavLink
 							onClick={onMenuBtnClicked()}
-							to={`/channel/${getChannelName()}/categories`}
+							to={`/channel/${channelName}/categories`}
 						>
 							Category
 						</NavLink>

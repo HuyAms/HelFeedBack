@@ -24,29 +24,73 @@ import ArrowForwardSrc from '../../assets/arrow-forward-icon.svg'
 import DataImgSrc from '../../assets/weather.png'
 import timeOutIcon from '../../assets/timeout-icon.png'
 import IconSlider from '../../components/IconSlider/IconSlider'
-import {getActiveSurveyId} from '../../services/localStorage'
 import {getSurvey} from '../../modules/Survey'
 import {connect} from 'react-redux'
 import ModelState from '../../models/bases/ModelState'
 import Survey from '../../models/Survey'
 import PopupModal from '../../components/PopupModal/PopupModal'
 
-interface Props {
+import {RouteComponentProps} from '@reach/router'
+import App from '../../models/App'
+import {Feedback} from '../../models/Feedback'
+import {createFeedback} from '../../modules/Feedback'
+import Channel from '../../models/Channel'
+import {usePrevious} from '../../utils/hooks'
+
+interface Props extends RouteComponentProps<{id: string}> {
 	path: string
 	getSurvey: (id: string) => void
 	survey: ModelState<Survey>
+	app: App
+	createFeedback: (feedback: Feedback) => any
+	channel: Channel
+	feedback: ModelState<Feedback>
 }
 
-export const Question: React.FC<Props> = props => {
-	const {getSurvey, survey} = props
+const Question: React.FC<Props> = props => {
+	const {getSurvey, survey, app, createFeedback, channel, feedback} = props
+	const prevFeedbackStatus = usePrevious(feedback.status)
 	const [isVisible, setVisible] = React.useState(false)
 	const [timeout] = React.useState(1000 * 60 * 10)
 	const [isTimedOut, setIsTimedOut] = React.useState(false)
 	const [idleTimer, setIdleTimer] = React.useState(null)
 
 	React.useEffect(() => {
-		getSurvey(getActiveSurveyId())
-	}, [])
+		if (!app.activeSurveyId) {
+			return
+		}
+
+		getSurvey(app.activeSurveyId)
+	}, [app.activeSurveyId])
+
+	React.useEffect(() => {
+		if (prevFeedbackStatus === 'saving' && feedback.status === 'success') {
+			onNextQuestion()
+		}
+	}, [feedback.status])
+
+	const [activeQuestionIndex, setActiveQuestionIndex] = React.useState(0)
+
+	const onNextQuestion = () => {
+		if (activeQuestionIndex < survey.data.questions.length - 1)
+			setActiveQuestionIndex(index => index + 1)
+	}
+
+	const onPreviousQuestion = () => {
+		if (activeQuestionIndex > 0) setActiveQuestionIndex(index => index - 1)
+	}
+
+	const submitFeedback = (choiceId: string, questionId: string) => {
+		const feedback: Feedback = {
+			channelId: channel._id,
+			surveyId: survey.data._id,
+			questionId,
+			value: choiceId,
+		}
+
+		props.createFeedback(feedback)
+		setVisible(true)
+	}
 
 	const handleClose = () => {
 		setVisible(false)
@@ -68,6 +112,19 @@ export const Question: React.FC<Props> = props => {
 	const renderSurvey = () => {
 		const {data} = survey
 
+		const selectedCategoryItems = data.questions.filter(
+			question => question.category === props.id,
+		)
+
+		const restItems = data.questions.filter(
+			question => question.category !== props.id,
+		)
+
+		const sortedItems = [...selectedCategoryItems, ...restItems]
+		console.log('SortedItems', sortedItems)
+
+		const question = sortedItems[activeQuestionIndex]
+
 		return (
 			<>
 				<IdleTimer
@@ -80,7 +137,7 @@ export const Question: React.FC<Props> = props => {
 					onAction={onAction}
 					debounce={250}
 					timeout={timeout}
-				></IdleTimer>
+				/>
 				<PopupModal
 					isOpen={isVisible}
 					handleClose={handleClose}
@@ -89,9 +146,12 @@ export const Question: React.FC<Props> = props => {
 					popupContent=""
 					completeButtonIsHidden={true}
 					timeoutButtonIsHidden={false}
-				></PopupModal>
+				/>
 				<TitleContainer>
-					<StyledArrowImage src={ArrowBackSrc} />
+					<StyledArrowImage
+						src={ArrowBackSrc}
+						onClick={() => onPreviousQuestion()}
+					/>
 
 					<DataContainer>
 						<InfoContainer>
@@ -107,17 +167,25 @@ export const Question: React.FC<Props> = props => {
 						</TitleContentContainer>
 					</DataContainer>
 
-					<StyledArrowImage src={ArrowForwardSrc} />
+					<StyledArrowImage
+						src={ArrowForwardSrc}
+						onClick={() => onNextQuestion()}
+					/>
 				</TitleContainer>
 
 				<QuestionContainer>
-					<p>{data.questions[0].heading}</p>
+					<p>{question.heading}</p>
 				</QuestionContainer>
 
 				<AnswerContainer>
-					{data.questions[0].choices.map(choices => {
+					{question.choices.map(choices => {
 						return (
-							<AnswerContentContainer key={choices.id}>
+							<AnswerContentContainer
+								key={choices._id}
+								onClick={() => {
+									submitFeedback(choices._id, question._id)
+								}}
+							>
 								<AnswerImage src={choices.imageUrl} />
 								<AnswerLabelContainer>
 									<p>{choices.value}</p>
@@ -128,7 +196,10 @@ export const Question: React.FC<Props> = props => {
 				</AnswerContainer>
 
 				<MobileAnswerContainer>
-					<IconSlider choices={data.questions[0].choices} />
+					<IconSlider
+						choices={question.choices}
+						onAnswerClick={choiceId => submitFeedback(choiceId, question._id)}
+					/>
 				</MobileAnswerContainer>
 
 				<StyledFooter>
@@ -136,8 +207,14 @@ export const Question: React.FC<Props> = props => {
 						<h2>?</h2>
 					</InstructionButton>
 					<h2>Temperature</h2>
-					<MobileStyledArrowImage src={ArrowBackSrc} />
-					<MobileStyledArrowImage src={ArrowForwardSrc} />
+					<MobileStyledArrowImage
+						src={ArrowBackSrc}
+						onClick={() => onPreviousQuestion()}
+					/>
+					<MobileStyledArrowImage
+						src={ArrowForwardSrc}
+						onClick={() => onNextQuestion()}
+					/>
 				</StyledFooter>
 			</>
 		)
@@ -148,12 +225,13 @@ export const Question: React.FC<Props> = props => {
 	)
 }
 
-const mapStateToProps = ({survey}) => {
-	return {survey}
+const mapStateToProps = ({survey, app, feedback, channel}) => {
+	return {survey, app, feedback, channel}
 }
 
 const mapDispatchToProps = {
 	getSurvey,
+	createFeedback,
 }
 
 export default connect(
