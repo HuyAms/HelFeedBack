@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 import {media} from '../../styles/utils'
-import {Link} from '@reach/router'
-import {hoverEffect} from '../Header/style'
 
 export const CategoryButton = styled.div`
 	background-color: ${props => props.theme.colors.lightGrey};

@@ -1,4 +1,5 @@
 import React from 'react'
+import IdleTimer from 'react-idle-timer'
 import {
 	AnswerContainer,
 	AnswerContentContainer,
@@ -21,11 +22,14 @@ import {
 import ArrowBackSrc from '../../assets/arrow-back-icon.svg'
 import ArrowForwardSrc from '../../assets/arrow-forward-icon.svg'
 import DataImgSrc from '../../assets/weather.png'
+import timeOutIcon from '../../assets/timeout-icon.png'
 import IconSlider from '../../components/IconSlider/IconSlider'
 import {getSurvey} from '../../modules/Survey'
 import {connect} from 'react-redux'
 import ModelState from '../../models/bases/ModelState'
 import Survey from '../../models/Survey'
+import PopupModal from '../../components/PopupModal/PopupModal'
+
 import {RouteComponentProps} from '@reach/router'
 import App from '../../models/App'
 import {Feedback} from '../../models/Feedback'
@@ -46,6 +50,10 @@ interface Props extends RouteComponentProps<{id: string}> {
 const Question: React.FC<Props> = props => {
 	const {getSurvey, survey, app, createFeedback, channel, feedback} = props
 	const prevFeedbackStatus = usePrevious(feedback.status)
+	const [isVisible, setVisible] = React.useState(false)
+	const [timeout] = React.useState(1000 * 60 * 10)
+	const [isTimedOut, setIsTimedOut] = React.useState(false)
+	const [idleTimer, setIdleTimer] = React.useState(null)
 
 	React.useEffect(() => {
 		if (!app.activeSurveyId) {
@@ -81,6 +89,24 @@ const Question: React.FC<Props> = props => {
 		}
 
 		props.createFeedback(feedback)
+		setVisible(true)
+	}
+
+	const handleClose = () => {
+		setVisible(false)
+	}
+
+	const onAction = () => {
+		setIsTimedOut(false)
+	}
+	const onActive = () => {
+		setIsTimedOut(false)
+	}
+
+	const onIdle = () => {
+		setIsTimedOut(true)
+		setVisible(true)
+		idleTimer.reset()
 	}
 
 	const renderSurvey = () => {
@@ -101,6 +127,26 @@ const Question: React.FC<Props> = props => {
 
 		return (
 			<>
+				<IdleTimer
+					ref={ref => {
+						setIdleTimer(ref)
+					}}
+					element={document}
+					onActive={onActive}
+					onIdle={onIdle}
+					onAction={onAction}
+					debounce={250}
+					timeout={timeout}
+				/>
+				<PopupModal
+					isOpen={isVisible}
+					handleClose={handleClose}
+					imgUrl={timeOutIcon}
+					title="Oops, timeout!"
+					popupContent=""
+					completeButtonIsHidden={true}
+					timeoutButtonIsHidden={false}
+				/>
 				<TitleContainer>
 					<StyledArrowImage
 						src={ArrowBackSrc}
