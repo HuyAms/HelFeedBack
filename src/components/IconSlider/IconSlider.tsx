@@ -6,6 +6,7 @@ import Choice from '../../models/Choice'
 
 interface Props {
 	choices: Choice[]
+	onAnswerClick: (choiceId: string) => void
 }
 
 export const IconSlider: React.FC<Props> = props => {
@@ -26,7 +27,10 @@ export const IconSlider: React.FC<Props> = props => {
 			<Slider {...settings}>
 				{choices.map(choices => {
 					return (
-						<AnswerContainer key={choices.id}>
+						<AnswerContainer
+							key={choices._id}
+							onClick={() => props.onAnswerClick(choices._id)}
+						>
 							<AnswerImage src={choices.imageUrl} style={{margin: '0 auto'}} />
 							<AnswerContentContainer>
 								<p>{choices.value}</p>

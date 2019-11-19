@@ -28,20 +28,38 @@ import ModelState from '../../models/bases/ModelState'
 import Survey from '../../models/Survey'
 import {RouteComponentProps} from '@reach/router'
 import App from '../../models/App'
+import {Feedback} from '../../models/Feedback'
+import {createFeedback} from '../../modules/Feedback'
+import Channel from '../../models/Channel'
+import {usePrevious} from '../../utils/hooks'
 
 interface Props extends RouteComponentProps<{id: string}> {
 	path: string
 	getSurvey: (id: string) => void
 	survey: ModelState<Survey>
 	app: App
+	createFeedback: (feedback: Feedback) => any
+	channel: Channel
+	feedback: ModelState<Feedback>
 }
 
 const Question: React.FC<Props> = props => {
-	const {getSurvey, survey, app} = props
+	const {getSurvey, survey, app, createFeedback, channel, feedback} = props
+	const prevFeedbackStatus = usePrevious(feedback.status)
 
 	React.useEffect(() => {
+		if (!app.activeSurveyId) {
+			return
+		}
+
 		getSurvey(app.activeSurveyId)
-	}, [])
+	}, [app.activeSurveyId])
+
+	React.useEffect(() => {
+		if (prevFeedbackStatus === 'saving' && feedback.status === 'success') {
+			onNextQuestion()
+		}
+	}, [feedback.status])
 
 	const [activeQuestionIndex, setActiveQuestionIndex] = React.useState(0)
 
@@ -54,8 +72,20 @@ const Question: React.FC<Props> = props => {
 		if (activeQuestionIndex > 0) setActiveQuestionIndex(index => index - 1)
 	}
 
+	const submitFeedback = (choiceId: string, questionId: string) => {
+		const feedback: Feedback = {
+			channelId: channel._id,
+			surveyId: survey.data._id,
+			questionId,
+			value: choiceId,
+		}
+
+		props.createFeedback(feedback)
+	}
+
 	const renderSurvey = () => {
 		const {data} = survey
+
 		const selectedCategoryItems = data.questions.filter(
 			question => question.category === props.id,
 		)
@@ -66,6 +96,8 @@ const Question: React.FC<Props> = props => {
 
 		const sortedItems = [...selectedCategoryItems, ...restItems]
 		console.log('SortedItems', sortedItems)
+
+		const question = sortedItems[activeQuestionIndex]
 
 		return (
 			<>
@@ -96,13 +128,18 @@ const Question: React.FC<Props> = props => {
 				</TitleContainer>
 
 				<QuestionContainer>
-					<p>{sortedItems[activeQuestionIndex].heading}</p>
+					<p>{question.heading}</p>
 				</QuestionContainer>
 
 				<AnswerContainer>
-					{sortedItems[activeQuestionIndex].choices.map(choices => {
+					{question.choices.map(choices => {
 						return (
-							<AnswerContentContainer key={choices.id}>
+							<AnswerContentContainer
+								key={choices._id}
+								onClick={() => {
+									submitFeedback(choices._id, question._id)
+								}}
+							>
 								<AnswerImage src={choices.imageUrl} />
 								<AnswerLabelContainer>
 									<p>{choices.value}</p>
@@ -113,7 +150,10 @@ const Question: React.FC<Props> = props => {
 				</AnswerContainer>
 
 				<MobileAnswerContainer>
-					<IconSlider choices={sortedItems[activeQuestionIndex].choices} />
+					<IconSlider
+						choices={question.choices}
+						onAnswerClick={choiceId => submitFeedback(choiceId, question._id)}
+					/>
 				</MobileAnswerContainer>
 
 				<StyledFooter>
@@ -139,12 +179,13 @@ const Question: React.FC<Props> = props => {
 	)
 }
 
-const mapStateToProps = ({survey, app}) => {
-	return {survey, app}
+const mapStateToProps = ({survey, app, feedback, channel}) => {
+	return {survey, app, feedback, channel}
 }
 
 const mapDispatchToProps = {
 	getSurvey,
+	createFeedback,
 }
 
 export default connect(
