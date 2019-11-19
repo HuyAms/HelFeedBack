@@ -4,6 +4,7 @@ import ChannelLayout from './layout/ChannelLayout'
 import Question from './screen/questionPage/Question'
 import Category from './screen/categoryPage/Category'
 import Main from './screen/mainPage/Main'
+import Admin from './screen/adminPage/Admin'
 
 const App = () => {
 	return (
@@ -13,6 +14,7 @@ const App = () => {
 					<Main path="/" />
 					<Category path="categories" />
 					<Question path="categories/:id/questions" />
+					<Admin path="admin" />
 				</ChannelLayout>
 			</Router>
 		</>
