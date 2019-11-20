@@ -230,7 +230,9 @@ const Question: React.FC<Props> = props => {
 
 				<MobileAnswerContainer>
 					<IconSlider
-						choices={question.choices}
+						choices={question.choices.filter(
+							choice => choice.showOnMobile === true,
+						)}
 						onAnswerClick={choiceId => submitFeedback(choiceId, question._id)}
 					/>
 				</MobileAnswerContainer>
