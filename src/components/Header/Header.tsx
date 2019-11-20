@@ -66,6 +66,10 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 			name: 'Survey',
 			path: `/admin/survey`,
 		},
+		{
+			name: 'Logout',
+			path: `/admin/logout`,
+		},
 	]
 
 	const renderMenuItems = () => {
