@@ -9,7 +9,7 @@ import ModelState from '../models/bases/ModelState'
 // ------------------------------------
 
 const moduleName = 'categories'
-const path = '/categories'
+const path = 'api/categories'
 
 const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 

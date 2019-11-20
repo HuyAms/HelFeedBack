@@ -15,7 +15,7 @@ import {Feedback} from '../models/Feedback'
 // ------------------------------------
 
 const moduleName = 'feedback'
-const path = '/feedbacks'
+const path = 'api/feedbacks'
 
 const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 

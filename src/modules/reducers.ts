@@ -11,6 +11,7 @@ import {reducer as channelReducer} from './Channel'
 import {reducer as categoriesReducer} from './Categories'
 import {reducer as appReducer} from './App'
 import {reducer as feedbackReducer} from './Feedback'
+import {reducer as authReducer} from './Auth'
 
 const rootReducer = () =>
 	combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = () =>
 		categories: categoriesReducer,
 		app: appReducer,
 		feedback: feedbackReducer,
-	})
+    auth: authReducer,
+  })
 
 export default rootReducer
