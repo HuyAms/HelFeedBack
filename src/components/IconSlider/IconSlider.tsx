@@ -1,7 +1,7 @@
 import React from 'react'
 import Slider from 'react-slick'
 
-import {AnswerContainer, AnswerContentContainer, AnswerImage} from './style'
+import {AnswerImage} from './style'
 import Choice from '../../models/Choice'
 
 interface Props {
@@ -27,15 +27,14 @@ export const IconSlider: React.FC<Props> = props => {
 			<Slider {...settings}>
 				{choices.map(choices => {
 					return (
-						<AnswerContainer
+						<div
+							style={{width: '120px'}}
 							key={choices._id}
 							onClick={() => props.onAnswerClick(choices._id)}
 						>
 							<AnswerImage src={choices.imageUrl} style={{margin: '0 auto'}} />
-							<AnswerContentContainer>
-								<p>{choices.value}</p>
-							</AnswerContentContainer>
-						</AnswerContainer>
+							<p style={{textAlign: 'center'}}>{choices.value}</p>
+						</div>
 					)
 				})}
 			</Slider>
