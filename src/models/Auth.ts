@@ -1,4 +1,4 @@
 export default interface Auth {
-  token: string
-  userId: string
+	token: string
+	userId: string
 }

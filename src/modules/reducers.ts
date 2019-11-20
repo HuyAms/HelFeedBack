@@ -20,7 +20,7 @@ const rootReducer = () =>
 		categories: categoriesReducer,
 		app: appReducer,
 		feedback: feedbackReducer,
-    auth: authReducer,
-  })
+		auth: authReducer,
+	})
 
 export default rootReducer

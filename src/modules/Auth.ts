@@ -1,16 +1,16 @@
 import produce from 'immer'
 import {
-  startFetching,
-  endWithError,
-  updateData,
-  Action,
-  startSaving,
+	startFetching,
+	endWithError,
+	updateData,
+	Action,
+	startSaving,
 } from './commons/common'
 import useModuleActions from './commons/moduleActions'
 import ModelState from '../models/bases/ModelState'
 import {Feedback} from '../models/Feedback'
-import Auth from "../models/Auth";
-import { getToken, getUserId } from "../services/localStorage";
+import Auth from '../models/Auth'
+import {getToken, getUserId} from '../services/localStorage'
 
 // ------------------------------------
 // Const
@@ -26,30 +26,30 @@ const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 // ------------------------------------
 
 const initialAuth: Auth = {
-  token: getToken(),
-  userId: getUserId(),
+	token: getToken(),
+	userId: getUserId(),
 }
 
 const initialState: ModelState<Auth> = {
-  data: initialAuth,
-  status: 'idle',
-  error: null,
+	data: initialAuth,
+	status: 'idle',
+	error: null,
 }
 
 const auth = (state = initialState, action: Action<Feedback[]>) =>
-  produce(state, draft => {
-    switch (action.type) {
-      case moduleActionTypes.CREATE_MODEL:
-        startSaving(draft)
-        break
-      case moduleActionTypes.CREATE_MODEL_SUCCESS:
-        updateData(draft, action.payload.data)
-        break
-      case moduleActionTypes.CREATE_MODEL_FAIL:
-        endWithError(draft, action.error)
-        break
-    }
-  })
+	produce(state, draft => {
+		switch (action.type) {
+			case moduleActionTypes.CREATE_MODEL:
+				startSaving(draft)
+				break
+			case moduleActionTypes.CREATE_MODEL_SUCCESS:
+				updateData(draft, action.payload.data)
+				break
+			case moduleActionTypes.CREATE_MODEL_FAIL:
+				endWithError(draft, action.error)
+				break
+		}
+	})
 
 export const reducer = auth
 
@@ -58,4 +58,4 @@ export const reducer = auth
 // ------------------------------------
 
 export const login = (email: string, password: string) =>
-  moduleActions.createModel({email, password}, 'signin')
+	moduleActions.createModel({email, password}, 'signin')
