@@ -23,7 +23,6 @@ export const PopupContainer = styled.div`
 	background-color: white;
 
 	border-radius: 2rem;
-	padding: 1.6rem;
 
 	${media.phone} {
 		z-index: 999;

@@ -33,7 +33,7 @@ export const CategoryLabel = styled.p`
 `
 
 export const CategoryImage = styled.img`
-	width: 100%;
+	width: 80%;
 
 	${media.phone} {
 		position: relative;
@@ -45,6 +45,8 @@ export const ContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding: 0.6rem;
+
 	cursor: pointer;
 `
 

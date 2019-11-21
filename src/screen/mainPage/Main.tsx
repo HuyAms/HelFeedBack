@@ -8,26 +8,33 @@ import {
 	Heading,
 	HeroImage,
 	ImageContainer,
+	SubHeading,
 } from './style'
+import {UserGroup} from '../../models/App'
+import {connect} from 'react-redux'
+import {setUserGroup} from '../../modules/App'
 
-interface Props extends RouteComponentProps<{name: string}> {}
+interface Props extends RouteComponentProps<{name: string}> {
+	setUserGroup: (userGroup: UserGroup) => any
+}
 
 const Main: React.FC<Props> = props => {
-	const {name} = props
+	const {name, setUserGroup} = props
 
-	const goToCategory = () => {
-		return navigate(`/channel/${name}/categories`)
+	const onUserGroupButtonClick = (userGroup: UserGroup) => {
+		setUserGroup(userGroup)
+		navigate(`/channel/${name}/categories`)
 	}
 
 	return (
 		<Container>
 			<ContentContainer>
 				<Heading>Welcome to Helsinki Feedback System</Heading>
-				<p>First, tell us, what group are you in?</p>
-				<ClassifyButton onClick={goToCategory}>
+				<SubHeading>First, tell us, what group are you in?</SubHeading>
+				<ClassifyButton onClick={() => onUserGroupButtonClick(UserGroup.child)}>
 					Under 13 years old
 				</ClassifyButton>
-				<ClassifyButton onClick={goToCategory}>
+				<ClassifyButton onClick={() => onUserGroupButtonClick(UserGroup.adult)}>
 					Over 13 years old
 				</ClassifyButton>
 			</ContentContainer>
@@ -38,4 +45,11 @@ const Main: React.FC<Props> = props => {
 	)
 }
 
-export default Main
+const mapDispatchToProps = {
+	setUserGroup,
+}
+
+export default connect(
+	null,
+	mapDispatchToProps,
+)(Main)

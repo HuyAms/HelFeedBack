@@ -1,4 +1,4 @@
-import App from '../models/App'
+import App, {UserGroup} from '../models/App'
 import produce from 'immer'
 import {createAction} from './commons/common'
 
@@ -13,10 +13,12 @@ const moduleName = 'app'
 
 const types = {
 	SET_ACTIVE_SURVEY_ID: `@@${moduleName}/SET_ACTIVE_SURVEY_ID`,
+	SET_ACTIVE_USER_GROUP: `@@${moduleName}/SET_ACTIVE_USER_GROUP`,
 }
 
 const actions = {
 	setActiveSurveyId: createAction(types.SET_ACTIVE_SURVEY_ID),
+	setUserGroup: createAction(types.SET_ACTIVE_USER_GROUP),
 }
 
 // ------------------------------------
@@ -25,6 +27,7 @@ const actions = {
 
 const initialState: App = {
 	activeSurveyId: null,
+	userGroup: null,
 }
 
 const app = (state = initialState, action) =>
@@ -32,6 +35,9 @@ const app = (state = initialState, action) =>
 		switch (action.type) {
 			case types.SET_ACTIVE_SURVEY_ID:
 				draft.activeSurveyId = action.payload
+				break
+			case types.SET_ACTIVE_USER_GROUP:
+				draft.userGroup = action.payload
 				break
 		}
 	})
@@ -44,4 +50,8 @@ export const reducer = app
 
 export const setActiveSurveyId = (activeSurveyId: string) => {
 	return actions.setActiveSurveyId(activeSurveyId)
+}
+
+export const setUserGroup = (userGroup: UserGroup) => {
+	return actions.setUserGroup(userGroup)
 }
