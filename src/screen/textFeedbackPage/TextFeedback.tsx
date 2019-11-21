@@ -8,13 +8,24 @@ import {
 
 interface Props extends RouteComponentProps<{name: string}> {}
 
-//TODO: disable send button if the textarea is empty
-
 const TextFeedback: React.FC<Props> = () => {
+	const [textFeedback, setTextFeedback] = React.useState('')
+
+	const onTextareaChange = e => {
+		setTextFeedback(e.target.value)
+		console.log(`value for feedback is: ${e.target.value}`)
+	}
+
 	return (
 		<TextFeedbackContainer>
-			<FeedbackTextarea autoFocus placeholder="Message..."></FeedbackTextarea>
-			<SendTextFeedbackButton>Send it</SendTextFeedbackButton>
+			<FeedbackTextarea
+				value={textFeedback}
+				onChange={onTextareaChange}
+				placeholder="Message..."
+			></FeedbackTextarea>
+			<SendTextFeedbackButton disabled={!textFeedback}>
+				Send it
+			</SendTextFeedbackButton>
 		</TextFeedbackContainer>
 	)
 }
