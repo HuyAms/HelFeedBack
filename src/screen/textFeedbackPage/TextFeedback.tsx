@@ -13,7 +13,6 @@ const TextFeedback: React.FC<Props> = () => {
 
 	const onTextareaChange = e => {
 		setTextFeedback(e.target.value)
-		console.log(`value for feedback is: ${e.target.value}`)
 	}
 
 	return (
@@ -21,6 +20,7 @@ const TextFeedback: React.FC<Props> = () => {
 			<FeedbackTextarea
 				value={textFeedback}
 				onChange={onTextareaChange}
+				maxLength={500}
 				placeholder="Message..."
 			></FeedbackTextarea>
 			<SendTextFeedbackButton disabled={!textFeedback}>
