@@ -62,6 +62,12 @@ const Header: React.FC<Props> = ({channelName}) => {
 						>
 							Category
 						</NavLink>
+						<NavLink
+							onClick={onMenuBtnClicked()}
+							to={`/channel/${channelName}/feedback`}
+						>
+							Feedback
+						</NavLink>
 					</LinkContainer>
 				</Navigation>
 			</StyledHeader>
