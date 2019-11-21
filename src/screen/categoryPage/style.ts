@@ -12,7 +12,8 @@ export const UnordererCategoryList = styled.ul`
 
 	${media.phone} {
 		grid-template-columns: repeat(2, 1fr);
-		grid-gap: 7rem;
-		top: 3rem;
+		grid-row-gap: 4rem;
+		grid-column-gap: 0;
+		top: 2rem;
 	}
 `
