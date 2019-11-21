@@ -56,7 +56,7 @@ export const StyledLink = styled(Link)`
 
 		${media.phone} {
 			margin-right: 0;
-			margin-bottom: 1.8rem;
+			margin-bottom: 0.8rem;
 		}
 	}
 
@@ -77,7 +77,7 @@ export const LinkContainer = styled.div<any>`
 		margin-left: 0;
 		flex-direction: column;
 		margin-top: 1.8rem;
-		height: ${props => (props.isOpen ? '20rem' : 0)};
+		height: ${props => (props.isOpen ? '10rem' : 0)};
 		visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
 	}
 `
