@@ -16,7 +16,7 @@ interface IProps {
 	handleClose: () => void
 	popupContent: string
 	imgUrl: string
-	title: string
+	title?: string
 }
 
 const PopupModal: React.FC<IProps> = props => {

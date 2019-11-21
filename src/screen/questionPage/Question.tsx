@@ -32,12 +32,14 @@ import Survey from '../../models/Survey'
 import PopupModal from '../../components/PopupModal/PopupModal'
 
 import {navigate, RouteComponentProps} from '@reach/router'
-import App from '../../models/App'
+import App, {UserGroup} from '../../models/App'
 import {Feedback} from '../../models/Feedback'
 import {createFeedback} from '../../modules/Feedback'
 import Channel from '../../models/Channel'
 import {usePrevious} from '../../utils/hooks'
-import {Content, PopupButton} from '../../components/PopupModal/style'
+import {PopupButton} from '../../components/PopupModal/style'
+import Category from '../../models/Category'
+import InstructionDummyImgUrl from '../../assets/categoryAssets/temperature-image.png'
 
 interface Props extends RouteComponentProps<{id: string}> {
 	path: string
@@ -47,13 +49,23 @@ interface Props extends RouteComponentProps<{id: string}> {
 	createFeedback: (feedback: Feedback) => any
 	channel: ModelState<Channel>
 	feedback: ModelState<Feedback>
+	category: ModelState<Category>
 }
 
 const Question: React.FC<Props> = props => {
-	const {getSurvey, survey, app, createFeedback, channel, feedback} = props
+	const {
+		getSurvey,
+		survey,
+		app,
+		createFeedback,
+		channel,
+		feedback,
+		category,
+	} = props
 	const prevFeedbackStatus = usePrevious(feedback.status)
 	const [isTimeOutVisible, setTimeoutVisible] = React.useState(false)
 	const [isCompleteVisible, setCompleteVisible] = React.useState(false)
+	const [isInstructionVisible, setInstructionVisible] = React.useState(false)
 	const [timeout] = React.useState(1000 * 60 * 10)
 	const [isTimedOut, setIsTimedOut] = React.useState(false)
 	const [idleTimer, setIdleTimer] = React.useState(null)
@@ -92,6 +104,7 @@ const Question: React.FC<Props> = props => {
 			surveyId: survey.data._id,
 			questionId,
 			value: choiceId,
+			userGroup: app.userGroup,
 		}
 
 		props.createFeedback(feedback)
@@ -103,6 +116,10 @@ const Question: React.FC<Props> = props => {
 
 	const handleCloseComplete = () => {
 		setCompleteVisible(false)
+	}
+
+	const handleCloseInstruction = () => {
+		setInstructionVisible(false)
 	}
 
 	const handleNavigateToCategory = () => {
@@ -142,6 +159,13 @@ const Question: React.FC<Props> = props => {
 
 		const question = sortedItems[activeQuestionIndex]
 
+		const choices =
+			app.userGroup === UserGroup.child
+				? question.choices.filter(choice => {
+						return choice.isForChildren === true
+				  })
+				: question.choices
+
 		return (
 			<>
 				<IdleTimer
@@ -180,6 +204,15 @@ const Question: React.FC<Props> = props => {
 						Back to category
 					</PopupButton>
 				</PopupModal>
+
+				<PopupModal
+					isOpen={isInstructionVisible}
+					handleClose={handleCloseInstruction}
+					imgUrl={InstructionDummyImgUrl}
+					title={'Instruction'}
+					popupContent={channel.data.name}
+				/>
+
 				<TitleContainer>
 					<StyledArrowImage
 						src={ArrowBackSrc}
@@ -211,7 +244,7 @@ const Question: React.FC<Props> = props => {
 				</QuestionContainer>
 
 				<AnswerContainer>
-					{question.choices.map(choices => {
+					{choices.map(choices => {
 						return (
 							<AnswerContentContainer
 								key={choices._id}
@@ -230,15 +263,13 @@ const Question: React.FC<Props> = props => {
 
 				<MobileAnswerContainer>
 					<IconSlider
-						choices={question.choices.filter(
-							choice => choice.showOnMobile === true,
-						)}
+						choices={choices}
 						onAnswerClick={choiceId => submitFeedback(choiceId, question._id)}
 					/>
 				</MobileAnswerContainer>
 
 				<StyledFooter>
-					<InstructionButton>
+					<InstructionButton onClick={() => setInstructionVisible(true)}>
 						<h2>?</h2>
 					</InstructionButton>
 					<h2>Temperature</h2>
@@ -260,8 +291,8 @@ const Question: React.FC<Props> = props => {
 	)
 }
 
-const mapStateToProps = ({survey, app, feedback, channel}) => {
-	return {survey, app, feedback, channel}
+const mapStateToProps = ({survey, app, feedback, channel, category}) => {
+	return {survey, app, feedback, channel, category}
 }
 
 const mapDispatchToProps = {
