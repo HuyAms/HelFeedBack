@@ -59,6 +59,10 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 
 	const adminMenus: Menu[] = [
 		{
+			name: 'Home',
+			path: `/admin/home`,
+		},
+		{
 			name: 'Channel',
 			path: `/admin/channel`,
 		},
