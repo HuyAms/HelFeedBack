@@ -14,13 +14,6 @@ export const hoverEffect = css`
 
 export const AppHeader = styled.div`
 	z-index: 99;
-
-	${media.phone} {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-	}
 `
 
 export const StyledHeader = styled.header`
@@ -84,7 +77,7 @@ export const LinkContainer = styled.div<any>`
 		margin-left: 0;
 		flex-direction: column;
 		margin-top: 1.8rem;
-		height: ${props => (props.isOpen ? '600px' : 0)};
+		height: ${props => (props.isOpen ? '20rem' : 0)};
 		visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
 	}
 `
@@ -108,12 +101,17 @@ export const Logo = styled.img`
 
 	${media.phone} {
 		height: auto;
-		width: 80%;
+		width: 50%;
 	}
 `
 
 export const AppName = styled.h1`
 	margin-left: 2.2rem;
+	color: ${props => props.theme.colors.white};
+
+	${media.phone} {
+		display: none;
+	}
 `
 
 export const BannerFooter = styled.img`
