@@ -8,6 +8,7 @@ import {
 	Heading,
 	HeroImage,
 	ImageContainer,
+	SubHeading,
 } from './style'
 
 interface Props extends RouteComponentProps<{name: string}> {}
@@ -23,7 +24,7 @@ const Main: React.FC<Props> = props => {
 		<Container>
 			<ContentContainer>
 				<Heading>Welcome to Helsinki Feedback System</Heading>
-				<p>First, tell us, what group are you in?</p>
+				<SubHeading>First, tell us, what group are you in?</SubHeading>
 				<ClassifyButton onClick={goToCategory}>
 					Under 13 years old
 				</ClassifyButton>

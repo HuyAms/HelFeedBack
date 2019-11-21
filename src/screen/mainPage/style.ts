@@ -31,7 +31,7 @@ export const HeroImage = styled.img`
 	margin: 0 auto;
 
 	${media.tabPort} {
-		width: 80%;
+		width: 50%;
 		max-width: 50rem;
 		margin-bottom: 4rem;
 	}
@@ -40,7 +40,13 @@ export const HeroImage = styled.img`
 export const Heading = styled.h1`
 	font-size: ${props => props.theme.fontSizes.xxl};
 	${media.tabPort} {
-		font-size: ${props => props.theme.fontSizes.xl};
+		font-size: ${props => props.theme.fontSizes.lg};
+	}
+`
+
+export const SubHeading = styled.p`
+	${media.tabPort} {
+		font-size: ${props => props.theme.fontSizes.xmd};
 	}
 `
 
@@ -52,7 +58,7 @@ export const ClassifyButton = styled.div`
 	text-align: center;
 	text-decoration-line: none;
 	color: ${props => props.theme.colors.black};
-	font-size: ${props => props.theme.fontSizes.lg};
+	font-size: ${props => props.theme.fontSizes.xmd};
 
 	cursor: pointer;
 
@@ -61,7 +67,7 @@ export const ClassifyButton = styled.div`
 	}
 
 	${media.tabPort} {
-		width: 100%;
+		width: 90%;
 		max-width: 70rem;
 	}
 `
