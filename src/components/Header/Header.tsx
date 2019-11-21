@@ -55,6 +55,10 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 			name: 'Category',
 			path: `/channel/${channelName}/categories`,
 		},
+		{
+			name: 'Report',
+			path: `/channel/${channelName}`,
+		},
 	]
 
 	const adminMenus: Menu[] = [
