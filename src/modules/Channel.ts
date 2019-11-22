@@ -9,7 +9,7 @@ import ModelState from '../models/bases/ModelState'
 // ------------------------------------
 
 const moduleName = 'channel'
-const path = '/channels'
+const path = 'api/channels'
 
 const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 

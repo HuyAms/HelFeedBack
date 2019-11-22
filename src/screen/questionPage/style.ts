@@ -10,7 +10,6 @@ export const TitleContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 2rem;
 
 	${media.tabPort} {
 		margin-bottom: 3rem;
@@ -69,9 +68,10 @@ export const QuestionContainer = styled.div`
 	background-color: ${props => props.theme.appColors.secondary};
 	padding: 1.6rem;
 	height: 11rem;
+	margin-top: 2rem;
 
 	${media.tabPort} {
-		margin-bottom: 5rem;
+		margin-top: 0;
 	}
 `
 
@@ -83,10 +83,6 @@ export const ContentContainer = styled.div`
 export const DataImage = styled.img`
 	width: 10rem;
 	height: auto;
-
-	${media.phone} {
-		width: 14.4rem;
-	}
 `
 
 export const AnswerContainer = styled.div`
@@ -108,7 +104,6 @@ export const AnswerContentContainer = styled.div`
 export const AnswerImage = styled.img`
 	width: 15rem;
 	height: 15rem;
-	margin-bottom: 0.3rem;
 	cursor: pointer;
 	transform: scale(0.8);
 	transition: all 0.2s ease-in;
@@ -138,12 +133,14 @@ export const MobileAnswerContainer = styled.div`
 
 	${media.phone} {
 		display: block;
+		margin-top: 2rem;
+		width: 100%;
 	}
 `
 
 export const DataContent = styled.h1`
 	${media.phone} {
-		font-size: ${props => props.theme.fontSizes.xxl};
+		font-size: ${props => props.theme.fontSizes.xl};
 	}
 `
 

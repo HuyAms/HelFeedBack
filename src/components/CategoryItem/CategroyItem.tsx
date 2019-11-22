@@ -35,11 +35,11 @@ const CategoryItem: React.FC<Props> = props => {
 			</ContentContainer>
 			<InstructionButton onClick={() => setVisible(true)}>?</InstructionButton>
 			<PopupModal
-				title={'Instruction'}
-				imgUrl={instruction.imageUrl}
-				popupContent={instruction.text}
 				isOpen={isVisible}
 				handleClose={handleClose}
+				imgUrl={instruction.imageUrl}
+				title={name}
+				popupContent={instruction.text}
 			/>
 		</CategoryButton>
 	)

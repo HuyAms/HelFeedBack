@@ -12,7 +12,7 @@ export const TextFeedbackContainer = styled.div`
 
 export const FeedbackTextarea = styled.textarea`
 	width: 100%;
-	height: 45rem;
+	height: 40rem;
 	margin: auto;
 	box-sizing: border-box;
 

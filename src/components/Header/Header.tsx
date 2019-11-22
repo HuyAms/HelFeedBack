@@ -30,14 +30,64 @@ const NavLink = (props: any) => (
 )
 
 interface Props {
-	channelName: string
+	channelName?: string
+	isAdmin?: boolean
 }
 
-const Header: React.FC<Props> = ({channelName}) => {
+interface Menu {
+	name: string
+	path: string
+}
+
+const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
 	const onMenuBtnClicked = () => () => {
 		setIsMenuOpen(isMenuOpen => !isMenuOpen)
+	}
+
+	const menus: Menu[] = [
+		{
+			name: 'Home',
+			path: `/channel/${channelName}`,
+		},
+		{
+			name: 'Category',
+			path: `/channel/${channelName}/categories`,
+		},
+		{
+			name: 'Report',
+			path: `/channel/${channelName}/feedback`,
+		},
+	]
+
+	const adminMenus: Menu[] = [
+		{
+			name: 'Home',
+			path: `/admin/home`,
+		},
+		{
+			name: 'Channel',
+			path: `/admin/channel`,
+		},
+		{
+			name: 'Survey',
+			path: `/admin/survey`,
+		},
+		{
+			name: 'Logout',
+			path: `/admin/logout`,
+		},
+	]
+
+	const renderMenuItems = () => {
+		const activeMenu = isAdmin ? adminMenus : menus
+
+		return activeMenu.map(menuItem => (
+			<NavLink onClick={onMenuBtnClicked()} to={menuItem.path}>
+				{menuItem.name}
+			</NavLink>
+		))
 	}
 
 	return (
@@ -45,30 +95,11 @@ const Header: React.FC<Props> = ({channelName}) => {
 			<StyledHeader>
 				<Navigation>
 					<MenuIcon onClick={onMenuBtnClicked()} src={menuIconSrc} />
-					<Banner onClick={onMenuBtnClicked()} to={`/channel/${channelName}`}>
+					<Banner to={isAdmin ? '/admin/home' : `/channel/${channelName}`}>
 						<Logo src={logo} alt="logo" />
 						<AppName>Feedback System</AppName>
 					</Banner>
-					<LinkContainer isOpen={isMenuOpen}>
-						<NavLink
-							onClick={onMenuBtnClicked()}
-							to={`/channel/${channelName}`}
-						>
-							Home
-						</NavLink>
-						<NavLink
-							onClick={onMenuBtnClicked()}
-							to={`/channel/${channelName}/categories`}
-						>
-							Category
-						</NavLink>
-						<NavLink
-							onClick={onMenuBtnClicked()}
-							to={`/channel/${channelName}/feedback`}
-						>
-							Feedback
-						</NavLink>
-					</LinkContainer>
+					<LinkContainer isOpen={isMenuOpen}>{renderMenuItems()}</LinkContainer>
 				</Navigation>
 			</StyledHeader>
 			<BannerFooter src={bannerFooter} />

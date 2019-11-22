@@ -9,7 +9,7 @@ import ModelState from '../models/bases/ModelState'
 // ------------------------------------
 
 const moduleName = 'survey'
-const path = '/surveys'
+const path = 'api/surveys'
 
 const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 
