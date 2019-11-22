@@ -5,6 +5,7 @@ import Question from './screen/questionPage/Question'
 import Category from './screen/categoryPage/Category'
 import AdminHome from './screen/admin/home'
 import Main from './screen/mainPage/Main'
+import TextFeedback from './screen/textFeedbackPage/TextFeedback'
 import AdminLayout from './layout/AdminLayout'
 import SignIn from './screen/auth/signin'
 import AdminLogout from './screen/admin/logout/AdminLogout'
@@ -26,6 +27,7 @@ const App = () => {
 				<Main path="/" />
 				<Category path="categories" />
 				<Question path="categories/:id/questions" />
+				<TextFeedback path="feedback" />
 			</ChannelLayout>
 			<NotFound default={true} />
 		</Router>

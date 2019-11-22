@@ -57,7 +57,7 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 		},
 		{
 			name: 'Report',
-			path: `/channel/${channelName}`,
+			path: `/channel/${channelName}/feedback`,
 		},
 	]
 
