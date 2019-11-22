@@ -19,7 +19,7 @@ export const PopupBackground = styled.div`
 export const PopupContainer = styled.div`
 	position: relative;
 	width: 40rem;
-	height: 47rem;
+	height: 50rem;
 	background-color: white;
 
 	border-radius: 2rem;
@@ -70,6 +70,7 @@ export const LabelImg = styled.img`
 
 export const PopupContent = styled.p`
 	margin-top: 2.4rem;
+	padding: 0 1.2rem;
 `
 export const PopupButtonContainer = styled.div`
 	position: relative;
