@@ -23,7 +23,6 @@ import ArrowBackSrc from '../../assets/arrow-back-icon.svg'
 import ArrowForwardSrc from '../../assets/arrow-forward-icon.svg'
 import DataImgSrc from '../../assets/weather.png'
 import TimeOutIcon from '../../assets/timeout-icon.png'
-import SuccessIcon from '../../assets/reward-icons/005-medal.png'
 import IconSlider from '../../components/IconSlider/IconSlider'
 import {getSurvey} from '../../modules/Survey'
 import {connect} from 'react-redux'
@@ -41,6 +40,15 @@ import {PopupButton} from '../../components/PopupModal/style'
 import Category from '../../models/Category'
 import InstructionDummyImgUrl from '../../assets/categoryAssets/temperature-image.png'
 
+import SuccessIcon1 from '../../assets/reward-icons/005-medal.png'
+import SuccessIcon2 from '../../assets/reward-icons/009-medal.png'
+import SuccessIcon3 from '../../assets/reward-icons/010-trophy.png'
+import SuccessIcon4 from '../../assets/reward-icons/011-medal.png'
+import SuccessIcon5 from '../../assets/reward-icons/012-trophy.png'
+import SuccessIcon6 from '../../assets/reward-icons/013-medal.png'
+import SuccessIcon7 from '../../assets/reward-icons/014-trophy.png'
+import SuccessIcon8 from '../../assets/reward-icons/019-medal.png'
+
 interface Props extends RouteComponentProps<{id: string}> {
 	path: string
 	getSurvey: (id: string) => void
@@ -50,6 +58,10 @@ interface Props extends RouteComponentProps<{id: string}> {
 	channel: ModelState<Channel>
 	feedback: ModelState<Feedback>
 	category: ModelState<Category>
+}
+
+interface CompleteImage {
+	path: string
 }
 
 const Question: React.FC<Props> = props => {
@@ -85,6 +97,37 @@ const Question: React.FC<Props> = props => {
 	}, [feedback.status])
 
 	const [activeQuestionIndex, setActiveQuestionIndex] = React.useState(0)
+
+	const completeImageArray: CompleteImage[] = [
+		{
+			path: SuccessIcon1,
+		},
+		{
+			path: SuccessIcon2,
+		},
+		{
+			path: SuccessIcon3,
+		},
+		{
+			path: SuccessIcon4,
+		},
+		{
+			path: SuccessIcon5,
+		},
+		{
+			path: SuccessIcon6,
+		},
+		{
+			path: SuccessIcon7,
+		},
+		{
+			path: SuccessIcon8,
+		},
+	]
+
+	const randomCompleteImage =
+		completeImageArray[Math.floor(Math.random() * completeImageArray.length)]
+			.path
 
 	const onNextQuestion = () => {
 		if (activeQuestionIndex < survey.data.questions.length - 1) {
@@ -196,7 +239,7 @@ const Question: React.FC<Props> = props => {
 				<PopupModal
 					isOpen={isCompleteVisible}
 					handleClose={handleCloseComplete}
-					imgUrl={SuccessIcon}
+					imgUrl={randomCompleteImage}
 					title="Amazing work!"
 					popupContent="Thank you for your feedback"
 				>
