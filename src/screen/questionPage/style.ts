@@ -10,7 +10,6 @@ export const TitleContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: red;
 
 	${media.tabPort} {
 		margin-bottom: 3rem;

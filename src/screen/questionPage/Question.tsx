@@ -228,7 +228,7 @@ const Question: React.FC<Props> = props => {
 						<TitleContentContainer>
 							<h2>Temperature</h2>
 							<InstructionButton>
-								<h2>?</h2>
+								<h2 onClick={() => setInstructionVisible(true)}>?</h2>
 							</InstructionButton>
 						</TitleContentContainer>
 					</DataContainer>
