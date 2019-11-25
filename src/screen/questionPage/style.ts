@@ -134,6 +134,7 @@ export const MobileAnswerContainer = styled.div`
 	${media.phone} {
 		display: block;
 		margin-top: 2rem;
+		padding: 0 25px;
 		width: 100%;
 	}
 `
