@@ -26,6 +26,7 @@ export const PopupContainer = styled.div`
 
 	${media.phone} {
 		z-index: 999;
+		width: 90%;
 	}
 `
 
@@ -70,7 +71,7 @@ export const LabelImg = styled.img`
 
 export const PopupContent = styled.p`
 	margin-top: 2.4rem;
-	padding: 0 1.2rem;
+	padding: 0 1.4rem;
 `
 export const PopupButtonContainer = styled.div`
 	position: relative;

@@ -3,10 +3,6 @@ import {media} from './utils'
 
 export const GlobalStyle = createGlobalStyle`
 
-#root {
-	height: 100%;
-}
-
 :root {
 	font-size: 62.5%;
 		
