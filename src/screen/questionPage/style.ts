@@ -48,9 +48,9 @@ export const InstructionButton = styled.div`
 	background-color: ${props => props.theme.appColors.secondary};
 	font-size: ${props => props.theme.fontSizes.xl};
 	border-radius: 1rem;
-	padding: 0.7rem;
-	width: 3rem;
-	height: 3rem;
+
+	width: 4rem;
+	height: 4rem;
 	margin-left: 1rem;
 	font-weight: bold;
 
@@ -134,6 +134,7 @@ export const MobileAnswerContainer = styled.div`
 	${media.phone} {
 		display: block;
 		margin-top: 2rem;
+		padding: 0 25px;
 		width: 100%;
 	}
 `
