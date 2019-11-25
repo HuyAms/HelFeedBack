@@ -19,14 +19,14 @@ export const CategoryButton = styled.div`
 
 	${media.phone} {
 		padding: 1rem;
-		width: 12rem;
-		height: 12rem;
+		width: 15rem;
+		height: 15rem;
 		size: 1rem;
 	}
 `
 export const CategoryLabel = styled.p`
 	${media.phone} {
-		font-size: ${props => props.theme.fontSizes.md};
+		font-size: ${props => props.theme.fontSizes.xmd};
 		position: relative;
 		top: 0.5rem;
 	}

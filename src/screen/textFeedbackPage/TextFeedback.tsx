@@ -21,10 +21,10 @@ const TextFeedback: React.FC<Props> = () => {
 				value={textFeedback}
 				onChange={onTextareaChange}
 				maxLength={500}
-				placeholder=" Message..."
+				placeholder="Viesti..."
 			/>
 			<SendTextFeedbackButton disabled={!textFeedback}>
-				Send it
+				Lähetä
 			</SendTextFeedbackButton>
 		</TextFeedbackContainer>
 	)

@@ -227,12 +227,12 @@ const Question: React.FC<Props> = props => {
 					isOpen={isTimeOutVisible}
 					handleClose={handleCloseTimeout}
 					imgUrl={TimeOutIcon}
-					title="Oops, timeout!"
-					popupContent=""
+					title="Aikakatkaisu!"
+					popupContent="Mitään ei tapahtunut 15:sta minuuttiin"
 				>
-					<PopupButton onClick={handleCloseTimeout}>Continue</PopupButton>
+					<PopupButton onClick={handleCloseTimeout}>Jatka</PopupButton>
 					<PopupButton onClick={handleNavigateToHome}>
-						Return to Home
+						Palaa etusivulle
 					</PopupButton>
 				</PopupModal>
 
@@ -240,11 +240,11 @@ const Question: React.FC<Props> = props => {
 					isOpen={isCompleteVisible}
 					handleClose={handleCloseComplete}
 					imgUrl={randomCompleteImage}
-					title="Amazing work!"
-					popupContent="Thank you for your feedback"
+					title="Loistavaa!"
+					popupContent="Kiitos vastauksestasi"
 				>
 					<PopupButton onClick={handleNavigateToCategory}>
-						Back to category
+						Takaisin kategorioihin
 					</PopupButton>
 				</PopupModal>
 
@@ -269,7 +269,7 @@ const Question: React.FC<Props> = props => {
 						</InfoContainer>
 
 						<TitleContentContainer>
-							<h2>Temperature</h2>
+							<h2>Lämpötila</h2>
 							<InstructionButton>
 								<h2 onClick={() => setInstructionVisible(true)}>?</h2>
 							</InstructionButton>
@@ -315,7 +315,7 @@ const Question: React.FC<Props> = props => {
 					<InstructionButton onClick={() => setInstructionVisible(true)}>
 						<h2>?</h2>
 					</InstructionButton>
-					<h2>Temperature</h2>
+					<h2>Lämpötila</h2>
 					<MobileStyledArrowImage
 						src={ArrowBackSrc}
 						onClick={() => onPreviousQuestion()}

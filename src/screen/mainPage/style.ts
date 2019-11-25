@@ -13,10 +13,13 @@ export const ContentContainer = styled.div`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
+	position: relative;
+	left: 2rem;
 
 	${media.tabPort} {
 		align-items: center;
 		text-align: center;
+		left: 0rem;
 	}
 `
 
@@ -40,13 +43,13 @@ export const HeroImage = styled.img`
 export const Heading = styled.h1`
 	font-size: ${props => props.theme.fontSizes.xxl};
 	${media.tabPort} {
-		font-size: ${props => props.theme.fontSizes.lg};
+		font-size: ${props => props.theme.fontSizes.xl};
 	}
 `
 
 export const SubHeading = styled.p`
 	${media.tabPort} {
-		font-size: ${props => props.theme.fontSizes.xmd};
+		font-size: ${props => props.theme.fontSizes.lg};
 	}
 `
 
@@ -58,7 +61,7 @@ export const ClassifyButton = styled.div`
 	text-align: center;
 	text-decoration-line: none;
 	color: ${props => props.theme.colors.black};
-	font-size: ${props => props.theme.fontSizes.xmd};
+	font-size: ${props => props.theme.fontSizes.lg};
 
 	cursor: pointer;
 

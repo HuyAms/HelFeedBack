@@ -48,22 +48,22 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 
 	const menus: Menu[] = [
 		{
-			name: 'Home',
+			name: 'Etusivu',
 			path: `/channel/${channelName}`,
 		},
 		{
-			name: 'Category',
+			name: 'Kategoriat',
 			path: `/channel/${channelName}/categories`,
 		},
 		{
-			name: 'Report',
+			name: 'Anna Palautetta',
 			path: `/channel/${channelName}/feedback`,
 		},
 	]
 
 	const adminMenus: Menu[] = [
 		{
-			name: 'Home',
+			name: 'Etusivu',
 			path: `/admin/home`,
 		},
 		{
@@ -71,11 +71,11 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 			path: `/admin/channel`,
 		},
 		{
-			name: 'Survey',
+			name: 'Kysely',
 			path: `/admin/survey`,
 		},
 		{
-			name: 'Logout',
+			name: 'Kirjaudu Ulos',
 			path: `/admin/logout`,
 		},
 	]
@@ -97,7 +97,7 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 					<MenuIcon onClick={onMenuBtnClicked()} src={menuIconSrc} />
 					<Banner to={isAdmin ? '/admin/home' : `/channel/${channelName}`}>
 						<Logo src={logo} alt="logo" />
-						<AppName>Feedback System</AppName>
+						<AppName>Helsingin Kyselyjärjestelmä</AppName>
 					</Banner>
 					<LinkContainer isOpen={isMenuOpen}>{renderMenuItems()}</LinkContainer>
 				</Navigation>
