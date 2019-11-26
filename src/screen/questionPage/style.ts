@@ -36,6 +36,7 @@ export const TitleContentContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: center;
 	width: auto;
 	height: auto;
 
@@ -134,7 +135,7 @@ export const MobileAnswerContainer = styled.div`
 	${media.phone} {
 		display: block;
 		margin-top: 2rem;
-		padding: 0 25px;
+		padding: 0 20px;
 		width: 100%;
 	}
 `
