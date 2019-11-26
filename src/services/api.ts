@@ -8,7 +8,8 @@
 import axios, {AxiosInstance, AxiosResponse} from 'axios'
 import {stringify} from 'query-string'
 
-const baseUrl: string = process.env.API_ENDPOINT || 'http://localhost:3000/'
+const baseUrl: string =
+	process.env.REACT_APP_API_ENDPOINT || 'http://localhost:3000/'
 
 export const api: AxiosInstance = axios.create({baseURL: baseUrl})
 
