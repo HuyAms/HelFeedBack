@@ -55,6 +55,7 @@ export const Content = styled.div`
 	align-items: center;
 
 	height: 100%;
+	padding: 1.2rem;
 `
 
 export const StyledTitle = styled.h1`

@@ -5,6 +5,7 @@ export const AnswerImage = styled.img`
 	height: 8rem;
 `
 
-export const AnswerContainer = styled.div`
-	background-color: red;
+export const AnswerText = styled.p`
+	text-align: center;
+	font-size: ${props => props.theme.fontSizes.xmd};
 `

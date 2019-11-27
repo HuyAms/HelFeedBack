@@ -26,7 +26,7 @@ export const CategoryButton = styled.div`
 `
 export const CategoryLabel = styled.p`
 	${media.phone} {
-		font-size: ${props => props.theme.fontSizes.xmd};
+		font-size: ${props => props.theme.fontSizes.md};
 		position: relative;
 		top: 0.5rem;
 	}

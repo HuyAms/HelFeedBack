@@ -15,6 +15,7 @@ export const FeedbackTextarea = styled.textarea`
 	height: 40rem;
 	margin: auto;
 	box-sizing: border-box;
+	padding: 1.5rem;
 
 	background: ${props => props.theme.colors.white};
 	border: 1px solid rgba(0, 0, 0, 0.3);

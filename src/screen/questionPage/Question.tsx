@@ -14,8 +14,8 @@ import {
 	MobileAnswerContainer,
 	MobileStyledArrowImage,
 	QuestionContainer,
+	QuestionContainerText,
 	StyledArrowImage,
-	StyledFooter,
 	TitleContainer,
 	TitleContentContainer,
 } from './style'
@@ -253,7 +253,7 @@ const Question: React.FC<Props> = props => {
 						Takaisin kategorioihin
 					</PopupButton>
 					<PopupButton onClick={handleNavigateToReport}>
-						Write feedback
+						Anna palautetta
 					</PopupButton>
 				</PopupModal>
 
@@ -273,8 +273,8 @@ const Question: React.FC<Props> = props => {
 
 					<DataContainer>
 						<InfoContainer>
-							<DataImage src={DataImgSrc} />
-							<DataContent>25°C</DataContent>
+							<DataImage src={category.instruction.imageUrl} />
+							{/*<DataContent>25°C</DataContent>*/}
 						</InfoContainer>
 
 						<TitleContentContainer>
@@ -320,20 +320,20 @@ const Question: React.FC<Props> = props => {
 					/>
 				</MobileAnswerContainer>
 
-				<StyledFooter>
-					<InstructionButton onClick={() => setInstructionVisible(true)}>
-						<h2>?</h2>
-					</InstructionButton>
-					<h2>{category.name}</h2>
-					<MobileStyledArrowImage
-						src={ArrowBackSrc}
-						onClick={() => onPreviousQuestion()}
-					/>
-					<MobileStyledArrowImage
-						src={ArrowForwardSrc}
-						onClick={() => onNextQuestion()}
-					/>
-				</StyledFooter>
+				{/*<StyledFooter>*/}
+				{/*<InstructionButton onClick={() => setInstructionVisible(true)}>*/}
+				{/*<h2>?</h2>*/}
+				{/*</InstructionButton>*/}
+				{/*<h2>{category.name}</h2>*/}
+				{/*<MobileStyledArrowImage*/}
+				{/*src={ArrowBackSrc}*/}
+				{/*onClick={() => onPreviousQuestion()}*/}
+				{/*/>*/}
+				{/*<MobileStyledArrowImage*/}
+				{/*src={ArrowForwardSrc}*/}
+				{/*onClick={() => onNextQuestion()}*/}
+				{/*/>*/}
+				{/*</StyledFooter>*/}
 			</>
 		)
 	}
