@@ -97,7 +97,7 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 					<MenuIcon onClick={onMenuBtnClicked()} src={menuIconSrc} />
 					<Banner to={isAdmin ? '/admin/home' : `/channel/${channelName}`}>
 						<Logo src={logo} alt="logo" />
-						<AppName>Helsingin Kyselyjärjestelmä</AppName>
+						<AppName>{channelName}</AppName>
 					</Banner>
 					<LinkContainer isOpen={isMenuOpen}>{renderMenuItems()}</LinkContainer>
 				</Navigation>

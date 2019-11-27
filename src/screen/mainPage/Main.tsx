@@ -32,10 +32,10 @@ const Main: React.FC<Props> = props => {
 				<Heading>Helsingin kaupungin kyselyjärjestelmä</Heading>
 				<SubHeading>Ensiksi, valitse kumpaan ryhmään kuulut</SubHeading>
 				<ClassifyButton onClick={() => onUserGroupButtonClick(UserGroup.child)}>
-					Alle 13-vuotias
+					Alle 10-vuotias
 				</ClassifyButton>
 				<ClassifyButton onClick={() => onUserGroupButtonClick(UserGroup.adult)}>
-					Yli 13-vuotias
+					Yli 10-vuotias
 				</ClassifyButton>
 			</ContentContainer>
 			<ImageContainer>
