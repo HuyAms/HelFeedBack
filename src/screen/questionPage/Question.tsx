@@ -169,6 +169,10 @@ const Question: React.FC<Props> = props => {
 		return navigate(`/channel/${channel.data.name}/categories`)
 	}
 
+	const handleNavigateToReport = () => {
+		return navigate(`/channel/${channel.data.name}/feedback`)
+	}
+
 	const handleNavigateToHome = () => {
 		return navigate(`/channel/${channel.data.name}/`)
 	}
@@ -190,17 +194,19 @@ const Question: React.FC<Props> = props => {
 		const {data} = survey
 
 		const selectedCategoryItems = data.questions.filter(
-			question => question.category === props.id,
+			question => question.category._id === props.id,
 		)
 
 		const restItems = data.questions.filter(
-			question => question.category !== props.id,
+			question => question.category._id !== props.id,
 		)
 
 		const sortedItems = [...selectedCategoryItems, ...restItems]
-		console.log('SortedItems', sortedItems)
 
 		const question = sortedItems[activeQuestionIndex]
+		const {category} = question
+
+		console.log('question', category)
 
 		const choices =
 			app.userGroup === UserGroup.child
@@ -246,14 +252,17 @@ const Question: React.FC<Props> = props => {
 					<PopupButton onClick={handleNavigateToCategory}>
 						Takaisin kategorioihin
 					</PopupButton>
+					<PopupButton onClick={handleNavigateToReport}>
+						Write feedback
+					</PopupButton>
 				</PopupModal>
 
 				<PopupModal
 					isOpen={isInstructionVisible}
 					handleClose={handleCloseInstruction}
-					imgUrl={InstructionDummyImgUrl}
+					imgUrl={category.instruction.imageUrl}
 					title={'Instruction'}
-					popupContent={channel.data.name}
+					popupContent={category.instruction.text}
 				/>
 
 				<TitleContainer>
@@ -269,7 +278,7 @@ const Question: React.FC<Props> = props => {
 						</InfoContainer>
 
 						<TitleContentContainer>
-							<h2>Lämpötila</h2>
+							<h2>{question.category.name}</h2>
 							<InstructionButton>
 								<h2 onClick={() => setInstructionVisible(true)}>?</h2>
 							</InstructionButton>
@@ -315,7 +324,7 @@ const Question: React.FC<Props> = props => {
 					<InstructionButton onClick={() => setInstructionVisible(true)}>
 						<h2>?</h2>
 					</InstructionButton>
-					<h2>Lämpötila</h2>
+					<h2>{category.name}</h2>
 					<MobileStyledArrowImage
 						src={ArrowBackSrc}
 						onClick={() => onPreviousQuestion()}

@@ -48,6 +48,9 @@ export const ContentContainer = styled.div`
 	padding: 0.6rem;
 
 	cursor: pointer;
+	${media.phone} {
+		padding: 0;
+	}
 `
 
 export const InstructionButton = styled.div`
