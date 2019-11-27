@@ -19,8 +19,8 @@ export const CategoryButton = styled.div`
 
 	${media.phone} {
 		padding: 1rem;
-		width: 13rem;
-		height: 13rem;
+		width: 15rem;
+		height: 15rem;
 		size: 1rem;
 	}
 `

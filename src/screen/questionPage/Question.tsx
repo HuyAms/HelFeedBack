@@ -14,8 +14,8 @@ import {
 	MobileAnswerContainer,
 	MobileStyledArrowImage,
 	QuestionContainer,
+	QuestionContainerText,
 	StyledArrowImage,
-	StyledFooter,
 	TitleContainer,
 	TitleContentContainer,
 } from './style'
@@ -233,12 +233,12 @@ const Question: React.FC<Props> = props => {
 					isOpen={isTimeOutVisible}
 					handleClose={handleCloseTimeout}
 					imgUrl={TimeOutIcon}
-					title="Oops, timeout!"
-					popupContent=""
+					title="Aikakatkaisu!"
+					popupContent="Mitään ei tapahtunut 15:sta minuuttiin"
 				>
-					<PopupButton onClick={handleCloseTimeout}>Continue</PopupButton>
+					<PopupButton onClick={handleCloseTimeout}>Jatka</PopupButton>
 					<PopupButton onClick={handleNavigateToHome}>
-						Return to Home
+						Palaa etusivulle
 					</PopupButton>
 				</PopupModal>
 
@@ -246,14 +246,14 @@ const Question: React.FC<Props> = props => {
 					isOpen={isCompleteVisible}
 					handleClose={handleCloseComplete}
 					imgUrl={randomCompleteImage}
-					title="Amazing work!"
-					popupContent="Thank you for your feedback"
+					title="Loistavaa!"
+					popupContent="Kiitos vastauksestasi"
 				>
 					<PopupButton onClick={handleNavigateToCategory}>
-						Back to category
+						Takaisin kategorioihin
 					</PopupButton>
 					<PopupButton onClick={handleNavigateToReport}>
-						Write feedback
+						Anna palautetta
 					</PopupButton>
 				</PopupModal>
 
@@ -273,8 +273,8 @@ const Question: React.FC<Props> = props => {
 
 					<DataContainer>
 						<InfoContainer>
-							<DataImage src={DataImgSrc} />
-							<DataContent>25°C</DataContent>
+							<DataImage src={category.instruction.imageUrl} />
+							{/*<DataContent>25°C</DataContent>*/}
 						</InfoContainer>
 
 						<TitleContentContainer>
@@ -320,20 +320,20 @@ const Question: React.FC<Props> = props => {
 					/>
 				</MobileAnswerContainer>
 
-				<StyledFooter>
-					<InstructionButton onClick={() => setInstructionVisible(true)}>
-						<h2>?</h2>
-					</InstructionButton>
-					<h2>{category.name}</h2>
-					<MobileStyledArrowImage
-						src={ArrowBackSrc}
-						onClick={() => onPreviousQuestion()}
-					/>
-					<MobileStyledArrowImage
-						src={ArrowForwardSrc}
-						onClick={() => onNextQuestion()}
-					/>
-				</StyledFooter>
+				{/*<StyledFooter>*/}
+				{/*<InstructionButton onClick={() => setInstructionVisible(true)}>*/}
+				{/*<h2>?</h2>*/}
+				{/*</InstructionButton>*/}
+				{/*<h2>{category.name}</h2>*/}
+				{/*<MobileStyledArrowImage*/}
+				{/*src={ArrowBackSrc}*/}
+				{/*onClick={() => onPreviousQuestion()}*/}
+				{/*/>*/}
+				{/*<MobileStyledArrowImage*/}
+				{/*src={ArrowForwardSrc}*/}
+				{/*onClick={() => onNextQuestion()}*/}
+				{/*/>*/}
+				{/*</StyledFooter>*/}
 			</>
 		)
 	}

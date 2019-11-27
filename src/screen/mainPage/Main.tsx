@@ -29,13 +29,13 @@ const Main: React.FC<Props> = props => {
 	return (
 		<Container>
 			<ContentContainer>
-				<Heading>Welcome to Helsinki Feedback System</Heading>
-				<SubHeading>First, tell us, what group are you in?</SubHeading>
+				<Heading>Helsingin kaupungin kyselyjärjestelmä</Heading>
+				<SubHeading>Ensiksi, valitse kumpaan ryhmään kuulut</SubHeading>
 				<ClassifyButton onClick={() => onUserGroupButtonClick(UserGroup.child)}>
-					Under 13 years old
+					Alle 13-vuotias
 				</ClassifyButton>
 				<ClassifyButton onClick={() => onUserGroupButtonClick(UserGroup.adult)}>
-					Over 13 years old
+					Yli 13-vuotias
 				</ClassifyButton>
 			</ContentContainer>
 			<ImageContainer>

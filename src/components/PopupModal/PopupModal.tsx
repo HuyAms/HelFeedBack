@@ -7,8 +7,6 @@ import {
 	PopupBackground,
 	PopupContainer,
 	StyledTitle,
-	PopupButton,
-	PopupButtonContainer,
 } from './style'
 
 interface IProps {

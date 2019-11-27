@@ -4,6 +4,15 @@ import {media} from '../../styles/utils'
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
+
+	${media.tabPort} {
+		max-width: 90%;
+		margin: 0 auto;
+	}
+
+	${media.phone} {
+		max-width: 100%;
+	}
 `
 
 export const TitleContainer = styled.div`
@@ -16,8 +25,7 @@ export const TitleContainer = styled.div`
 	}
 
 	${media.phone} {
-		align-items: center;
-		justify-content: center;
+		justify-content: space-around;
 	}
 `
 
@@ -26,10 +34,6 @@ export const StyledArrowImage = styled.img`
 	height: 6rem;
 
 	cursor: pointer;
-
-	${media.phone} {
-		display: none;
-	}
 `
 
 export const TitleContentContainer = styled.div`
@@ -39,10 +43,6 @@ export const TitleContentContainer = styled.div`
 	justify-content: center;
 	width: auto;
 	height: auto;
-
-	${media.phone} {
-		display: none;
-	}
 `
 
 export const InstructionButton = styled.div`
@@ -100,6 +100,7 @@ export const AnswerContainer = styled.div`
 export const AnswerContentContainer = styled.div`
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 `
 
 export const AnswerImage = styled.img`
@@ -127,6 +128,7 @@ export const InfoContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: center;
 `
 
 export const MobileAnswerContainer = styled.div`
@@ -146,20 +148,20 @@ export const DataContent = styled.h1`
 	}
 `
 
-export const StyledFooter = styled.div`
-	display: none;
-
-	${media.phone} {
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		left: 0;
-
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-	}
-`
+// export const StyledFooter = styled.div`
+// 	display: none;
+//
+// 	${media.phone} {
+// 		position: absolute;
+// 		bottom: 0;
+// 		right: 0;
+// 		left: 0;
+//
+// 		display: flex;
+// 		align-items: center;
+// 		justify-content: space-around;
+// 	}
+// `
 
 export const MobileStyledArrowImage = styled.img`
 	display: none;
@@ -168,5 +170,11 @@ export const MobileStyledArrowImage = styled.img`
 		display: block;
 		width: 6rem;
 		height: auto;
+	}
+`
+
+export const QuestionContainerText = styled.p`
+	${media.phone} {
+		font-size: ${props => props.theme.fontSizes.md};
 	}
 `

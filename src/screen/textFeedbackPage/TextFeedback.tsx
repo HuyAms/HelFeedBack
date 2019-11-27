@@ -103,23 +103,23 @@ const TextFeedback: React.FC<Props> = props => {
 				isOpen={isCompleteVisible}
 				handleClose={handleCloseComplete}
 				imgUrl={randomCompleteImage}
-				title="Great job!"
-				popupContent="Thank you for your feedback"
+				title="Hyvää työtä!"
+				popupContent="Kiitos vastauksestasi"
 			>
-				<PopupButton onClick={handleCloseComplete}>Continue</PopupButton>
+				<PopupButton onClick={handleCloseComplete}>Jatka</PopupButton>
 			</PopupModal>
 
 			<FeedbackTextarea
 				value={textFeedback}
 				onChange={onTextareaChange}
 				maxLength={500}
-				placeholder=" Message..."
+				placeholder="Viesti..."
 			/>
 			<SendTextFeedbackButton
 				disabled={!textFeedback}
 				onClick={submitFeedbackText}
 			>
-				Send it
+				Lähetä
 			</SendTextFeedbackButton>
 		</TextFeedbackContainer>
 	)
