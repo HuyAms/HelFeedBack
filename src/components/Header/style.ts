@@ -88,6 +88,7 @@ export const Banner = styled(Link)`
 	${hoverEffect};
 	text-decoration-line: none;
 	color: ${props => props.theme.colors.white};
+	align-items: center;
 
 	${media.phone} {
 		flex-direction: column;
@@ -96,8 +97,8 @@ export const Banner = styled(Link)`
 `
 
 export const Logo = styled.img`
-	height: 4.6rem;
-	width: 10rem;
+	height: auto;
+	width: 15rem;
 
 	${media.phone} {
 		height: auto;
@@ -107,10 +108,11 @@ export const Logo = styled.img`
 
 export const AppName = styled.h1`
 	margin-left: 2.2rem;
+	margin-bottom: 0;
 	color: ${props => props.theme.colors.white};
 
 	${media.phone} {
-		display: none;
+		margin-left: 0;
 	}
 `
 
