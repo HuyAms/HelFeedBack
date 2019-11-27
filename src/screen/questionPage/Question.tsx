@@ -38,7 +38,6 @@ import Channel from '../../models/Channel'
 import {usePrevious} from '../../utils/hooks'
 import {PopupButton} from '../../components/PopupModal/style'
 import Category from '../../models/Category'
-import InstructionDummyImgUrl from '../../assets/categoryAssets/temperature-image.png'
 
 import SuccessIcon1 from '../../assets/reward-icons/005-medal.png'
 import SuccessIcon2 from '../../assets/reward-icons/009-medal.png'
@@ -48,6 +47,7 @@ import SuccessIcon5 from '../../assets/reward-icons/012-trophy.png'
 import SuccessIcon6 from '../../assets/reward-icons/013-medal.png'
 import SuccessIcon7 from '../../assets/reward-icons/014-trophy.png'
 import SuccessIcon8 from '../../assets/reward-icons/019-medal.png'
+import Slider from 'react-slick'
 
 interface Props extends RouteComponentProps<{id: string}> {
 	path: string
@@ -81,6 +81,8 @@ const Question: React.FC<Props> = props => {
 	const [timeout] = React.useState(1000 * 60 * 10)
 	const [isTimedOut, setIsTimedOut] = React.useState(false)
 	const [idleTimer, setIdleTimer] = React.useState(null)
+
+	const sliderRef = React.useRef<Slider>()
 
 	React.useEffect(() => {
 		if (!app.activeSurveyId) {
@@ -130,8 +132,20 @@ const Question: React.FC<Props> = props => {
 			.path
 
 	const onNextQuestion = () => {
-		if (activeQuestionIndex < survey.data.questions.length - 1) {
+		const {questions} = survey.data
+		if (activeQuestionIndex < questions.length - 1) {
+			const nextQuestion = questions[activeQuestionIndex + 1]
+
+			const choices =
+				app.userGroup === UserGroup.child
+					? nextQuestion.choices.filter(choice => {
+							return choice.isForChildren === true
+					  })
+					: nextQuestion.choices
+
+			const middleChoiceIndex = Math.floor(choices.length / 2)
 			setActiveQuestionIndex(index => index + 1)
+			sliderRef.current.slickGoTo(middleChoiceIndex)
 		} else {
 			setCompleteVisible(true)
 		}
@@ -315,6 +329,7 @@ const Question: React.FC<Props> = props => {
 
 				<MobileAnswerContainer>
 					<IconSlider
+						ref={sliderRef}
 						choices={choices}
 						onAnswerClick={choiceId => submitFeedback(choiceId, question._id)}
 					/>
