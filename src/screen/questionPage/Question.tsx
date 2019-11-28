@@ -7,21 +7,17 @@ import {
 	AnswerLabelContainer,
 	Container,
 	DataContainer,
-	DataContent,
 	DataImage,
 	InfoContainer,
 	InstructionButton,
 	MobileAnswerContainer,
-	MobileStyledArrowImage,
 	QuestionContainer,
-	QuestionContainerText,
 	StyledArrowImage,
 	TitleContainer,
 	TitleContentContainer,
 } from './style'
 import ArrowBackSrc from '../../assets/arrow-back-icon.svg'
 import ArrowForwardSrc from '../../assets/arrow-forward-icon.svg'
-import DataImgSrc from '../../assets/weather.png'
 import TimeOutIcon from '../../assets/timeout-icon.png'
 import IconSlider from '../../components/IconSlider/IconSlider'
 import {getSurvey} from '../../modules/Survey'
@@ -69,10 +65,8 @@ const Question: React.FC<Props> = props => {
 		getSurvey,
 		survey,
 		app,
-		createFeedback,
 		channel,
 		feedback,
-		category,
 	} = props
 	const prevFeedbackStatus = usePrevious(feedback.status)
 	const [isTimeOutVisible, setTimeoutVisible] = React.useState(false)
@@ -131,28 +125,38 @@ const Question: React.FC<Props> = props => {
 		completeImageArray[Math.floor(Math.random() * completeImageArray.length)]
 			.path
 
+	const centerChoices = () => {
+    const {questions} = survey.data
+
+    const nextQuestion = questions[activeQuestionIndex + 1]
+
+    const choices =
+      app.userGroup === UserGroup.child
+        ? nextQuestion.choices.filter(choice => {
+          return choice.isForChildren === true
+        })
+        : nextQuestion.choices
+
+    const middleChoiceIndex = Math.floor(choices.length / 2)
+    sliderRef.current.slickGoTo(middleChoiceIndex)
+  }
+
 	const onNextQuestion = () => {
-		const {questions} = survey.data
-		if (activeQuestionIndex < questions.length - 1) {
-			const nextQuestion = questions[activeQuestionIndex + 1]
+    const {questions} = survey.data
 
-			const choices =
-				app.userGroup === UserGroup.child
-					? nextQuestion.choices.filter(choice => {
-							return choice.isForChildren === true
-					  })
-					: nextQuestion.choices
-
-			const middleChoiceIndex = Math.floor(choices.length / 2)
+    if (activeQuestionIndex < questions.length - 1) {
 			setActiveQuestionIndex(index => index + 1)
-			sliderRef.current.slickGoTo(middleChoiceIndex)
+      centerChoices()
 		} else {
 			setCompleteVisible(true)
 		}
 	}
 
 	const onPreviousQuestion = () => {
-		if (activeQuestionIndex > 0) setActiveQuestionIndex(index => index - 1)
+		if (activeQuestionIndex > 0) {
+      centerChoices()
+      setActiveQuestionIndex(index => index - 1)
+		}
 	}
 
 	const submitFeedback = (choiceId: string, questionId: string) => {
@@ -219,8 +223,6 @@ const Question: React.FC<Props> = props => {
 
 		const question = sortedItems[activeQuestionIndex]
 		const {category} = question
-
-		console.log('question', category)
 
 		const choices =
 			app.userGroup === UserGroup.child
@@ -334,21 +336,6 @@ const Question: React.FC<Props> = props => {
 						onAnswerClick={choiceId => submitFeedback(choiceId, question._id)}
 					/>
 				</MobileAnswerContainer>
-
-				{/*<StyledFooter>*/}
-				{/*<InstructionButton onClick={() => setInstructionVisible(true)}>*/}
-				{/*<h2>?</h2>*/}
-				{/*</InstructionButton>*/}
-				{/*<h2>{category.name}</h2>*/}
-				{/*<MobileStyledArrowImage*/}
-				{/*src={ArrowBackSrc}*/}
-				{/*onClick={() => onPreviousQuestion()}*/}
-				{/*/>*/}
-				{/*<MobileStyledArrowImage*/}
-				{/*src={ArrowForwardSrc}*/}
-				{/*onClick={() => onNextQuestion()}*/}
-				{/*/>*/}
-				{/*</StyledFooter>*/}
 			</>
 		)
 	}
