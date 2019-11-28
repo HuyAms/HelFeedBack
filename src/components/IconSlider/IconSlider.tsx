@@ -12,6 +12,7 @@ interface Props {
 
 export const IconSlider: React.FC<Props> = React.forwardRef(
 	(props, ref: React.Ref<Slider>) => {
+
 		const settings = {
 			centerMode: true,
 			slidesToShow: 1,
@@ -19,7 +20,7 @@ export const IconSlider: React.FC<Props> = React.forwardRef(
 			variableWidth: true,
 			speed: 500,
 			infinite: false,
-			initialSlide: 1,
+			initialSlide: Math.floor(props.choices.length/2),
 			arrows: true,
 		}
 
@@ -32,7 +33,7 @@ export const IconSlider: React.FC<Props> = React.forwardRef(
 						return (
 							<div
 								style={{
-									width: '120px',
+									width: '90px',
 								}}
 								key={choices._id}
 								onClick={() => props.onAnswerClick(choices._id)}
