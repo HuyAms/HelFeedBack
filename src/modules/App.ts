@@ -1,6 +1,7 @@
 import App, {UserGroup} from '../models/App'
 import produce from 'immer'
 import {createAction} from './commons/common'
+import { getUserGroup, setGroup } from "../services/localStorage";
 
 // ------------------------------------
 // Const
@@ -27,7 +28,7 @@ const actions = {
 
 const initialState: App = {
 	activeSurveyId: null,
-	userGroup: null,
+	userGroup: getUserGroup(),
 }
 
 const app = (state = initialState, action) =>
@@ -53,5 +54,6 @@ export const setActiveSurveyId = (activeSurveyId: string) => {
 }
 
 export const setUserGroup = (userGroup: UserGroup) => {
+  setGroup(userGroup)
 	return actions.setUserGroup(userGroup)
 }
