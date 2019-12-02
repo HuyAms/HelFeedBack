@@ -6,7 +6,7 @@ import { getChannels } from "../../../modules/Channels";
 import ModelState from "../../../models/bases/ModelState";
 import Channel from "../../../models/Channel";
 import {DatePicker} from 'antd';
-import { ChannelSelectContainer, FilterContainer } from "./style";
+import { ChannelSelectContainer, ChartHeader, FilterContainer } from "./style";
 import { getSurvey } from "../../../modules/Survey";
 import Survey from "../../../models/Survey";
 import { usePrevious } from "../../../utils/hooks";
@@ -25,6 +25,7 @@ const {RangePicker} = DatePicker;
 const AdminHome: React.FunctionComponent<Props> = ({getChannels, getSurvey, channels, survey}) => {
 
   const [selectedChannelId, setSelectedChannelId] = React.useState(null)
+  const [selectedQuestionId, setSelectedQuestionId] = React.useState(null)
 
   // Get all channels
 	React.useEffect(() => {
@@ -35,6 +36,7 @@ const AdminHome: React.FunctionComponent<Props> = ({getChannels, getSurvey, chan
   React.useEffect(() => {
 
     if (selectedChannelId) {
+      console.log('GET SURVEY ACTIVE ID: ', selectedChannelId)
       getSurvey(selectedChannelId)
     }
 
@@ -48,8 +50,13 @@ const AdminHome: React.FunctionComponent<Props> = ({getChannels, getSurvey, chan
     }
   }, [channels.status])
 
-  const onSelectChange = (value) => {
-    setSelectedChannelId(value)
+  const onChannelChange = (channelId) => {
+    const selectedChannel = channels.data.find(channel => channel._id = channelId)
+    setSelectedChannelId(selectedChannel.activeSurveyId)
+  }
+
+  const onQuestionsSelectChange = (value) => {
+    console.log('onQuestionsSelectChange: ', value)
   }
 
   const onDateRangechange = (date, dateString) => {
@@ -62,8 +69,26 @@ const AdminHome: React.FunctionComponent<Props> = ({getChannels, getSurvey, chan
 
       return (
         <ChannelSelectContainer>
-          <Select defaultValue={channels.data[0]._id} style={{ width: 200 }} onChange={onSelectChange}>
+          <Select defaultValue={channels.data[0]._id} style={{ width: '25rem' }} onChange={onChannelChange}>
             {channels.data.map(channel => (<Option key={channel._id} value={channel._id}>{channel.name}</Option>))}
+          </Select>
+        </ChannelSelectContainer>
+      )
+    }
+
+    return null
+  }
+
+  const renderQuestionsSelect = () => {
+
+    if(survey.status === 'success') {
+
+      const {questions} = survey.data
+
+      return (
+        <ChannelSelectContainer>
+          <Select defaultValue={questions[0]._id} style={{ width: '100%' }} onChange={onQuestionsSelectChange}>
+            {questions.map(question => (<Option key={question._id} value={question._id}>{question.heading}</Option>))}
           </Select>
         </ChannelSelectContainer>
       )
@@ -74,10 +99,13 @@ const AdminHome: React.FunctionComponent<Props> = ({getChannels, getSurvey, chan
 
 	return (
     <>
-      <FilterContainer>
-        {renderChannelsSelect()}
-        <RangePicker onChange={onDateRangechange} />
-      </FilterContainer>
+      <ChartHeader>
+        <FilterContainer>
+          {renderChannelsSelect()}
+          <RangePicker onChange={onDateRangechange} />
+        </FilterContainer>
+        {renderQuestionsSelect()}
+      </ChartHeader>
     </>
   )
 }
