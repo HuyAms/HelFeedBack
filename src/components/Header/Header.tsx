@@ -84,7 +84,7 @@ const Header: React.FC<Props> = ({channelName, isAdmin}) => {
 		const activeMenu = isAdmin ? adminMenus : menus
 
 		return activeMenu.map(menuItem => (
-			<NavLink onClick={onMenuBtnClicked()} to={menuItem.path}>
+			<NavLink key={menuItem.path} onClick={onMenuBtnClicked()} to={menuItem.path}>
 				{menuItem.name}
 			</NavLink>
 		))
