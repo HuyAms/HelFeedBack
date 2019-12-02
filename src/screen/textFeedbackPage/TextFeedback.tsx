@@ -12,7 +12,6 @@ import App from '../../models/App'
 import Channel from '../../models/Channel'
 import {createFeedback} from '../../modules/Feedback'
 import {connect} from 'react-redux'
-import TimeOutIcon from '../../assets/timeout-icon.png'
 import {PopupButton} from '../../components/PopupModal/style'
 import PopupModal from '../../components/PopupModal/PopupModal'
 
