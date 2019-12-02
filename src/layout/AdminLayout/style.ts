@@ -6,7 +6,6 @@ export const Container = styled.div`
 
 	${media.phone} {
 		padding-top: 0;
-		margin-top: 232px;
 		padding: 0 1rem;
 	}
 `
