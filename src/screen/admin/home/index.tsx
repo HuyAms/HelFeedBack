@@ -7,9 +7,14 @@ import ModelState from "../../../models/bases/ModelState";
 import Channel from "../../../models/Channel";
 import {DatePicker} from 'antd';
 import { ChannelSelectContainer, FilterContainer } from "./style";
+import { getSurvey } from "../../../modules/Survey";
+import Survey from "../../../models/Survey";
+import { usePrevious } from "../../../utils/hooks";
 
 interface Props extends RouteComponentProps {
   getChannels: () => any
+  getSurvey: (id: string) => void
+  survey: ModelState<Survey>
   channels: ModelState<Channel[]>
 }
 
@@ -17,14 +22,34 @@ const {Option} = Select;
 
 const {RangePicker} = DatePicker;
 
-const AdminHome: React.FunctionComponent<Props> = ({getChannels, channels}) => {
+const AdminHome: React.FunctionComponent<Props> = ({getChannels, getSurvey, channels, survey}) => {
 
+  const [selectedChannelId, setSelectedChannelId] = React.useState(null)
+
+  // Get all channels
 	React.useEffect(() => {
     getChannels()
 	}, [])
 
+  // Get survey based on channelId
+  React.useEffect(() => {
+
+    if (selectedChannelId) {
+      getSurvey(selectedChannelId)
+    }
+
+  }, [selectedChannelId])
+
+  // Set first channel by default
+  const prevFeedbackStatus = usePrevious(channels.status)
+  React.useEffect(() => {
+    if (prevFeedbackStatus === 'fetching' && channels.status === 'success') {
+      setSelectedChannelId(channels.data[0].activeSurveyId)
+    }
+  }, [channels.status])
+
   const onSelectChange = (value) => {
-    console.log(`selected ${value}`);
+    setSelectedChannelId(value)
   }
 
   const onDateRangechange = (date, dateString) => {
@@ -57,12 +82,13 @@ const AdminHome: React.FunctionComponent<Props> = ({getChannels, channels}) => {
   )
 }
 
-const mapStateToProps = ({channels}) => {
-  return {channels}
+const mapStateToProps = ({channels, survey}) => {
+  return {channels, survey}
 }
 
 const mapDispatchToProps = {
   getChannels,
+  getSurvey,
 }
 
 export default connect(
