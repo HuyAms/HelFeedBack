@@ -1,6 +1,5 @@
 import produce from 'immer'
 import {
-	startFetching,
 	endWithError,
 	updateData,
 	Action,

@@ -6,10 +6,12 @@ export enum FeedbackType {
 }
 
 export interface Feedback {
+	_id?: string
 	channelId: string
 	surveyId: string
 	questionId?: string
 	value: string
 	userGroup: UserGroup
-	type: FeedbackType
+	type: FeedbackType,
+	createdAt?: Date,
 }

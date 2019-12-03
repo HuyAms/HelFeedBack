@@ -73,7 +73,7 @@ const TextFeedback: React.FC<Props> = props => {
 
 	const [isCompleteVisible, setCompleteVisible] = React.useState(false)
 
-	const {survey, app, channel, feedback} = props
+	const {survey, app, channel} = props
 
 	const handleCloseComplete = () => {
 		setCompleteVisible(false)
