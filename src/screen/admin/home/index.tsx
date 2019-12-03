@@ -1,26 +1,26 @@
-import React from "react";
-import { DatePicker, Select } from "antd";
-import { RouteComponentProps } from "@reach/router";
-import { connect } from "react-redux";
-import { getChannels } from "../../../modules/Channels";
-import ModelState from "../../../models/bases/ModelState";
-import Channel from "../../../models/Channel";
-import { ChannelSelectContainer, ChartHeader, FilterContainer } from "./style";
-import { getSurvey } from "../../../modules/Survey";
-import Survey from "../../../models/Survey";
-import { usePrevious } from "../../../utils/hooks";
-import Stackedcolumn from "./components/Chart";
-import { getFeedbacks } from "../../../modules/Feedbacks";
-import { Feedback, FeedbackType } from "../../../models/Feedback";
-import FeedbackTable from "./components/FeedbackTable";
+import React from 'react'
+import {DatePicker, Select} from 'antd'
+import {RouteComponentProps} from '@reach/router'
+import {connect} from 'react-redux'
+import {getChannels} from '../../../modules/Channels'
+import ModelState from '../../../models/bases/ModelState'
+import Channel from '../../../models/Channel'
+import {ChannelSelectContainer, ChartHeader, FilterContainer} from './style'
+import {getSurvey} from '../../../modules/Survey'
+import Survey from '../../../models/Survey'
+import {usePrevious} from '../../../utils/hooks'
+import Stackedcolumn from './components/Chart'
+import {getFeedbacks} from '../../../modules/Feedbacks'
+import {Feedback, FeedbackType} from '../../../models/Feedback'
+import FeedbackTable from './components/FeedbackTable'
 
 interface Props extends RouteComponentProps {
 	getChannels: () => any
 	getSurvey: (id: string) => void
-  getFeedbacks: (channelId: string, type: FeedbackType) => any
+	getFeedbacks: (channelId: string, type: FeedbackType) => any
 	survey: ModelState<Survey>
 	channels: ModelState<Channel[]>
-  feedbacks: ModelState<Feedback[]>
+	feedbacks: ModelState<Feedback[]>
 }
 
 const {Option} = Select
@@ -46,7 +46,10 @@ const AdminHome: React.FunctionComponent<Props> = ({
 	// Get survey based on channelId
 	React.useEffect(() => {
 		if (selectedChannelId) {
-			getSurvey(channels.data.find(channel => channel._id === selectedChannelId).activeSurveyId)
+			getSurvey(
+				channels.data.find(channel => channel._id === selectedChannelId)
+					.activeSurveyId,
+			)
 			getFeedbacks(selectedChannelId, FeedbackType.text)
 		}
 	}, [selectedChannelId])
@@ -119,7 +122,7 @@ const AdminHome: React.FunctionComponent<Props> = ({
 
 	const renderFeedbackTable = () => {
 		if (feedbacks.status === 'success') {
-			return (<FeedbackTable feedbacks={feedbacks.data}/>)
+			return <FeedbackTable feedbacks={feedbacks.data} />
 		}
 
 		return null
@@ -135,7 +138,7 @@ const AdminHome: React.FunctionComponent<Props> = ({
 				{renderQuestionsSelect()}
 			</ChartHeader>
 			<Stackedcolumn />
-      {renderFeedbackTable()}
+			{renderFeedbackTable()}
 		</>
 	)
 }
@@ -147,7 +150,7 @@ const mapStateToProps = ({channels, survey, feedbacks}) => {
 const mapDispatchToProps = {
 	getChannels,
 	getSurvey,
-  getFeedbacks,
+	getFeedbacks,
 }
 
 export default connect(

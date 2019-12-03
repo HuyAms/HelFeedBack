@@ -12,6 +12,6 @@ export interface Feedback {
 	questionId?: string
 	value: string
 	userGroup: UserGroup
-	type: FeedbackType,
-	createdAt?: Date,
+	type: FeedbackType
+	createdAt?: Date
 }
