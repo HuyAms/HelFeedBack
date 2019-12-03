@@ -21,32 +21,26 @@ class Stackedcolumn extends React.Component {
 		const data = [
 			{
 				name: 'Adult',
-				'Jan.': 18.9,
-				'Feb.': 28.8,
-				'Mar.': 39.3,
-				'Apr.': 81.4,
-				May: 47,
-				'Jun.': 20.3,
-				'Jul.': 24,
-				'Aug.': 35.6,
+				'Kuuma': 1,
+				'Lämmin': 2,
+				'Sopiva': 30,
+				'Viileä': 3,
+				'Kylmä': 2,
 			},
 			{
 				name: 'Child',
-				'Jan.': 12.4,
-				'Feb.': 23.2,
-				'Mar.': 34.5,
-				'Apr.': 99.7,
-				May: 52.6,
-				'Jun.': 35.5,
-				'Jul.': 37.4,
-				'Aug.': 42.4,
+				'Kuuma': 2,
+				'Lämmin': 2,
+				'Sopiva': 10,
+				'Viileä': 1,
+				'Kylmä': 1,
 			},
 		]
 		const ds = new DataSet()
 		const dv = ds.createView().source(data)
 		dv.transform({
 			type: 'fold',
-			fields: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.', 'Jul.', 'Aug.'],
+			fields: ['Kuuma', 'Lämmin', 'Sopiva', 'Viileä', 'Kylmä'],
 			// 展开字段集
 			key: '月份',
 			// key字段
