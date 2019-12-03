@@ -21,19 +21,19 @@ class Stackedcolumn extends React.Component {
 		const data = [
 			{
 				name: 'Adult',
-				'Kuuma': 1,
-				'Lämmin': 2,
-				'Sopiva': 30,
-				'Viileä': 3,
-				'Kylmä': 2,
+				Kuuma: 1,
+				Lämmin: 2,
+				Sopiva: 30,
+				Viileä: 3,
+				Kylmä: 2,
 			},
 			{
 				name: 'Child',
-				'Kuuma': 2,
-				'Lämmin': 2,
-				'Sopiva': 10,
-				'Viileä': 1,
-				'Kylmä': 1,
+				Kuuma: 2,
+				Lämmin: 2,
+				Sopiva: 10,
+				Viileä: 1,
+				Kylmä: 1,
 			},
 		]
 		const ds = new DataSet()
