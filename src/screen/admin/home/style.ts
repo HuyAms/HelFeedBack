@@ -18,6 +18,7 @@ margin-bottom: 2.4rem;
 
 export const ChartHeader = styled.div`
 width: 600px;
+margin-bottom: 4.8rem;
 
 ${media.phone} {
 width: 100%;

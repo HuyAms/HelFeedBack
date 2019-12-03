@@ -10,6 +10,7 @@ import { ChannelSelectContainer, ChartHeader, FilterContainer } from "./style";
 import { getSurvey } from "../../../modules/Survey";
 import Survey from "../../../models/Survey";
 import { usePrevious } from "../../../utils/hooks";
+import Stackedcolumn from "./components/Chart";
 
 interface Props extends RouteComponentProps {
   getChannels: () => any
@@ -106,6 +107,7 @@ const AdminHome: React.FunctionComponent<Props> = ({getChannels, getSurvey, chan
         </FilterContainer>
         {renderQuestionsSelect()}
       </ChartHeader>
+      <Stackedcolumn/>
     </>
   )
 }
