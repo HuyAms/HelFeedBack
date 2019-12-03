@@ -1,15 +1,16 @@
 import produce from 'immer'
-import {endWithError, updateData, Action, startSaving} from './commons/common'
+import {startFetching, endWithError, updateData, Action} from './commons/common'
 import useModuleActions from './commons/moduleActions'
+import Category from '../models/Category'
 import ModelState from '../models/bases/ModelState'
-import {Feedback} from '../models/Feedback'
+import {Feedback, FeedbackType} from '../models/Feedback'
 
 // ------------------------------------
 // Const
 // ------------------------------------
 
-const moduleName = 'feedback'
-const path = 'api/feedbacks'
+const moduleName = 'feedbacks'
+const path = 'api/channels'
 
 const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 
@@ -23,26 +24,26 @@ const initialState: ModelState<Feedback[]> = {
 	error: null,
 }
 
-const feedback = (state = initialState, action: Action<Feedback[]>) =>
+const feeedbacks = (state = initialState, action: Action<Category[]>) =>
 	produce(state, draft => {
 		switch (action.type) {
-			case moduleActionTypes.CREATE_MODEL:
-				startSaving(draft)
+			case moduleActionTypes.GET_MODEL:
+				startFetching(draft)
 				break
-			case moduleActionTypes.CREATE_MODEL_SUCCESS:
+			case moduleActionTypes.GET_MODEL_SUCCESS:
 				updateData(draft, action.payload.data)
 				break
-			case moduleActionTypes.CREATE_MODEL_FAIL:
+			case moduleActionTypes.GET_MODEL_FAIL:
 				endWithError(draft, action.error)
 				break
 		}
 	})
 
-export const reducer = feedback
+export const reducer = feeedbacks
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-export const createFeedback = (feedback: Feedback) =>
-	moduleActions.createModel(feedback)
+export const getFeedbacks = (channelId: string, type: FeedbackType) =>
+	moduleActions.getModel(`${channelId}/feedback`, {type})

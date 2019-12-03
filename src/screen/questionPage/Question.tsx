@@ -28,7 +28,7 @@ import PopupModal from '../../components/PopupModal/PopupModal'
 
 import {navigate, RouteComponentProps} from '@reach/router'
 import App, {UserGroup} from '../../models/App'
-import {Feedback} from '../../models/Feedback'
+import {Feedback, FeedbackType} from '../../models/Feedback'
 import {createFeedback} from '../../modules/Feedback'
 import Channel from '../../models/Channel'
 import {usePrevious} from '../../utils/hooks'
@@ -61,13 +61,7 @@ interface CompleteImage {
 }
 
 const Question: React.FC<Props> = props => {
-	const {
-		getSurvey,
-		survey,
-		app,
-		channel,
-		feedback,
-	} = props
+	const {getSurvey, survey, app, channel, feedback} = props
 	const prevFeedbackStatus = usePrevious(feedback.status)
 	const [isTimeOutVisible, setTimeoutVisible] = React.useState(false)
 	const [isCompleteVisible, setCompleteVisible] = React.useState(false)
@@ -126,27 +120,27 @@ const Question: React.FC<Props> = props => {
 			.path
 
 	const centerChoices = () => {
-    const {questions} = survey.data
+		const {questions} = survey.data
 
-    const nextQuestion = questions[activeQuestionIndex + 1]
+		const nextQuestion = questions[activeQuestionIndex + 1]
 
-    const choices =
-      app.userGroup === UserGroup.child
-        ? nextQuestion.choices.filter(choice => {
-          return choice.isForChildren === true
-        })
-        : nextQuestion.choices
+		const choices =
+			app.userGroup === UserGroup.child
+				? nextQuestion.choices.filter(choice => {
+						return choice.isForChildren === true
+				  })
+				: nextQuestion.choices
 
-    const middleChoiceIndex = Math.floor(choices.length / 2)
-    sliderRef.current.slickGoTo(middleChoiceIndex)
-  }
+		const middleChoiceIndex = Math.floor(choices.length / 2)
+		sliderRef.current.slickGoTo(middleChoiceIndex)
+	}
 
 	const onNextQuestion = () => {
-    const {questions} = survey.data
+		const {questions} = survey.data
 
-    if (activeQuestionIndex < questions.length - 1) {
+		if (activeQuestionIndex < questions.length - 1) {
 			setActiveQuestionIndex(index => index + 1)
-      centerChoices()
+			centerChoices()
 		} else {
 			setCompleteVisible(true)
 		}
@@ -154,18 +148,19 @@ const Question: React.FC<Props> = props => {
 
 	const onPreviousQuestion = () => {
 		if (activeQuestionIndex > 0) {
-      centerChoices()
-      setActiveQuestionIndex(index => index - 1)
+			centerChoices()
+			setActiveQuestionIndex(index => index - 1)
 		}
 	}
 
-	const submitFeedback = (choiceId: string, questionId: string) => {
+	const submitFeedback = (choiceValue: string, questionId: string) => {
 		const feedback: Feedback = {
 			channelId: channel.data._id,
 			surveyId: survey.data._id,
 			questionId,
-			value: choiceId,
+			value: choiceValue,
 			userGroup: app.userGroup,
+			type: FeedbackType.choice,
 		}
 
 		props.createFeedback(feedback)
@@ -317,7 +312,7 @@ const Question: React.FC<Props> = props => {
 							<AnswerContentContainer
 								key={choices._id}
 								onClick={() => {
-									submitFeedback(choices._id, question._id)
+									submitFeedback(choices.value, question._id)
 								}}
 							>
 								<AnswerImage src={choices.imageUrl} />

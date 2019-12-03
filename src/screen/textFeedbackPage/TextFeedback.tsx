@@ -1,11 +1,11 @@
 import React from 'react'
 import {RouteComponentProps} from '@reach/router'
 import {
-	TextFeedbackContainer,
 	FeedbackTextarea,
 	SendTextFeedbackButton,
+	TextFeedbackContainer,
 } from './style'
-import {Feedback} from '../../models/Feedback'
+import {Feedback, FeedbackType} from '../../models/Feedback'
 import ModelState from '../../models/bases/ModelState'
 import Survey from '../../models/Survey'
 import App from '../../models/App'
@@ -73,7 +73,7 @@ const TextFeedback: React.FC<Props> = props => {
 
 	const [isCompleteVisible, setCompleteVisible] = React.useState(false)
 
-	const {survey, app, channel, feedback} = props
+	const {survey, app, channel} = props
 
 	const handleCloseComplete = () => {
 		setCompleteVisible(false)
@@ -89,6 +89,7 @@ const TextFeedback: React.FC<Props> = props => {
 			surveyId: survey.data._id,
 			value: textFeedback,
 			userGroup: app.userGroup,
+			type: FeedbackType.text,
 		}
 
 		setCompleteVisible(true)

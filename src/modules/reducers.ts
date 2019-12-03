@@ -12,6 +12,7 @@ import {reducer as channelsReducer} from './Channels'
 import {reducer as categoriesReducer} from './Categories'
 import {reducer as appReducer} from './App'
 import {reducer as feedbackReducer} from './Feedback'
+import {reducer as feedbacksReducer} from './Feedbacks'
 import {reducer as authReducer} from './Auth'
 
 const rootReducer = () =>
@@ -22,6 +23,7 @@ const rootReducer = () =>
 		categories: categoriesReducer,
 		app: appReducer,
 		feedback: feedbackReducer,
+		feedbacks: feedbacksReducer,
 		auth: authReducer,
 	})
 

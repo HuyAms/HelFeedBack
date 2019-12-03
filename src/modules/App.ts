@@ -1,7 +1,7 @@
 import App, {UserGroup} from '../models/App'
 import produce from 'immer'
 import {createAction} from './commons/common'
-import { getUserGroup, setGroup } from "../services/localStorage";
+import {getUserGroup, setGroup} from '../services/localStorage'
 
 // ------------------------------------
 // Const
@@ -54,6 +54,6 @@ export const setActiveSurveyId = (activeSurveyId: string) => {
 }
 
 export const setUserGroup = (userGroup: UserGroup) => {
-  setGroup(userGroup)
+	setGroup(userGroup)
 	return actions.setUserGroup(userGroup)
 }
