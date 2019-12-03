@@ -18,25 +18,25 @@ const {moduleActionTypes, moduleActions} = useModuleActions(moduleName, path)
 // ------------------------------------
 
 const initialState: ModelState<Channel> = {
-  data: null,
-  status: 'idle',
-  error: null,
+	data: null,
+	status: 'idle',
+	error: null,
 }
 
 const channels = (state = initialState, action: Action<Channel>) =>
-  produce(state, draft => {
-    switch (action.type) {
-      case moduleActionTypes.GET_MODEL:
-        startFetching(draft)
-        break
-      case moduleActionTypes.GET_MODEL_SUCCESS:
-        updateData(draft, action.payload.data)
-        break
-      case moduleActionTypes.GET_MODEL_FAIL:
-        endWithError(draft, action.error)
-        break
-    }
-  })
+	produce(state, draft => {
+		switch (action.type) {
+			case moduleActionTypes.GET_MODEL:
+				startFetching(draft)
+				break
+			case moduleActionTypes.GET_MODEL_SUCCESS:
+				updateData(draft, action.payload.data)
+				break
+			case moduleActionTypes.GET_MODEL_FAIL:
+				endWithError(draft, action.error)
+				break
+		}
+	})
 
 export const reducer = channels
 

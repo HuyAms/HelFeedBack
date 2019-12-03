@@ -1,24 +1,28 @@
-import React from "react";
-import { RouteComponentProps } from "@reach/router";
-import { FeedbackTextarea, SendTextFeedbackButton, TextFeedbackContainer } from "./style";
-import { Feedback, FeedbackType } from "../../models/Feedback";
-import ModelState from "../../models/bases/ModelState";
-import Survey from "../../models/Survey";
-import App from "../../models/App";
-import Channel from "../../models/Channel";
-import { createFeedback } from "../../modules/Feedback";
-import { connect } from "react-redux";
-import { PopupButton } from "../../components/PopupModal/style";
-import PopupModal from "../../components/PopupModal/PopupModal";
+import React from 'react'
+import {RouteComponentProps} from '@reach/router'
+import {
+	FeedbackTextarea,
+	SendTextFeedbackButton,
+	TextFeedbackContainer,
+} from './style'
+import {Feedback, FeedbackType} from '../../models/Feedback'
+import ModelState from '../../models/bases/ModelState'
+import Survey from '../../models/Survey'
+import App from '../../models/App'
+import Channel from '../../models/Channel'
+import {createFeedback} from '../../modules/Feedback'
+import {connect} from 'react-redux'
+import {PopupButton} from '../../components/PopupModal/style'
+import PopupModal from '../../components/PopupModal/PopupModal'
 
-import SuccessIcon1 from "../../assets/reward-icons/005-medal.png";
-import SuccessIcon2 from "../../assets/reward-icons/009-medal.png";
-import SuccessIcon3 from "../../assets/reward-icons/010-trophy.png";
-import SuccessIcon4 from "../../assets/reward-icons/011-medal.png";
-import SuccessIcon5 from "../../assets/reward-icons/012-trophy.png";
-import SuccessIcon6 from "../../assets/reward-icons/013-medal.png";
-import SuccessIcon7 from "../../assets/reward-icons/014-trophy.png";
-import SuccessIcon8 from "../../assets/reward-icons/019-medal.png";
+import SuccessIcon1 from '../../assets/reward-icons/005-medal.png'
+import SuccessIcon2 from '../../assets/reward-icons/009-medal.png'
+import SuccessIcon3 from '../../assets/reward-icons/010-trophy.png'
+import SuccessIcon4 from '../../assets/reward-icons/011-medal.png'
+import SuccessIcon5 from '../../assets/reward-icons/012-trophy.png'
+import SuccessIcon6 from '../../assets/reward-icons/013-medal.png'
+import SuccessIcon7 from '../../assets/reward-icons/014-trophy.png'
+import SuccessIcon8 from '../../assets/reward-icons/019-medal.png'
 
 interface Props extends RouteComponentProps<{name: string}> {
 	path: string
@@ -85,7 +89,7 @@ const TextFeedback: React.FC<Props> = props => {
 			surveyId: survey.data._id,
 			value: textFeedback,
 			userGroup: app.userGroup,
-			type: FeedbackType.text
+			type: FeedbackType.text,
 		}
 
 		setCompleteVisible(true)

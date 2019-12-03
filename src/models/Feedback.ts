@@ -10,6 +10,6 @@ export interface Feedback {
 	surveyId: string
 	questionId?: string
 	value: string
-	userGroup: UserGroup,
+	userGroup: UserGroup
 	type: FeedbackType
 }
